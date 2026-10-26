@@ -1,0 +1,29 @@
+# Dragon colors template
+
+# window title bars and borders
+window.active.title.bg.color: #26282a
+window.inactive.title.bg.color: #151617
+window.active.label.text.color: #d1d1d1
+window.inactive.label.text.color: #b8b8b8
+window.active.border.color: #234f78
+window.inactive.border.color: #606465
+
+# window buttons
+window.active.button.unpressed.image.color: #d1d1d1
+window.inactive.button.unpressed.image.color: #b8b8b8
+
+# menu
+menu.border.color: #606465
+menu.items.bg.color: #151617E5
+menu.items.text.color: #d1d1d1
+menu.items.active.bg.color: #234f78
+menu.items.active.text.color: #ebebeb
+menu.separator.color: #606465
+menu.title.bg.color: #18191a
+menu.title.text.color: #d1d1d1
+
+# on screen display (window-cycle dialog)
+osd.bg.color: #151617
+osd.border.color: #606465
+osd.label.text.color: #d1d1d1
+osd.window-switcher.preview.border.color: #234f78,#000000,#234f78

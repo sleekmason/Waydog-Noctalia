@@ -1,0 +1,7 @@
+Package: *
+Pin: origin pkg.noctalia.dev
+Pin-Priority: 100
+
+Package: noctalia noctalia-data fonts-noctalia-tabler noctalia-greeter nickh-archive-keyring
+Pin: origin pkg.noctalia.dev
+Pin-Priority: 500

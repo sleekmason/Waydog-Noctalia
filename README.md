@@ -1,0 +1,127 @@
+﻿Waydog is a lightweight Linux distro based on Debian Trixie. Waydog
+uses the new Wayland protocol for its display server.
+
+Labwc is installed as default, with separate installation options for
+Mango, Niri, Sway, and Wayfire compositors in the Waydog installers.
+
+Mango, Niri, Sway, and Wayfire can all be tested in a live environment
+by installing the compositor of choice, and then logging out and back
+into whichever you prefer. The live password: 'live' will be required
+to log back in.
+
+### Resources:
+- [DistroWatch](https://distrowatch.com/table.php?distribution=lilidog)
+- [Waydog Github](https://github.com/sleekmason/Waydog-Trixie)
+- [SourceForge Main Page](https://sourceforge.net/projects/lilidog/)
+- [Downloads](https://sourceforge.net/projects/lilidog/files/Releases/)
+
+#### Waydog Trixie
+[![2026-09-26T12-50-18-893874419-00-00.png](https://i.postimg.cc/Dw9n7vHJ/2026-09-26T12-50-18-893874419-00-00.png)](https://postimg.cc/BjBdg0q4)
+
+### Current Release Format:
+The version number shown is the date of the release beginning with the
+year, followed by the month, and then the day. So as an example,
+release 26.03.14 stands for the 14th of Mar, 2026.
+
+To identify a Waydog build date after installation, in a terminal, try:
+`cat /usr/share/lilidog/GPL/current-build`
+
+### Updating:
+Waydog uses the 'stable' version of Debian, which is currently Trixie.
+Updates to Debian packages are gained by using apt:
+
+`sudo apt update && sudo apt upgrade`
+
+### Directions for Installation:
+One easy way to install Waydog is to grab the live-usb-maker app:
+https://github.com/MX-Linux/lum-qt-appimage/releases/tag/19.11.02
+Download the AppImage.tar.gz and open a terminal:
+
+`tar -xaf live-usb-maker-qt-19.11.02.x86_64.AppImage.tar.gz`
+Then:  
+`sudo ./live-usb-maker-qt-19.11.02.x86_64.AppImage`
+
+Use "image mode" in the live-usb maker when burning the image.
+
+The boot screen for Waydog gives a choice of using as a live session or
+installing if you like what you see.
+
+### Exploring Waydog:
+For live login use: Live Username = 'user', and Live Password = 'live'
+The live session starts in the SDDM display manager after boot.
+
+Waydog can be run in a VM, but not very well due to apparent Wayland
+requirements. Ample video memory is a must.
+
+### Features:
+- Keybinds. All window managers use 'Super + F1' to show the list.
+- Labwc and Sway window managers installed by default. Choose at login.
+- Mango, Niri, Sway, and Wayfire WMs available through the installers.
+- SDDM display manager for initial login.
+- Ly login manager is included as a separate install option.
+- Waybar provides the panel top bar.
+- Waybar Options provides a dialog to adjust waybar settings on the fly.
+- NWG Look provides the interface for GTK settings.
+- GTK Theme Sync dialog to match your terminal, fuzzel, and Mako.
+- Labwc Tweaks provides for common Labwc adjustments.
+- Gamma Control provides gamma and contrast control, with custom presets.
+- Usbimager to create USB images.
+- Waypicker color picker for Wayland use. Copies selection to clipboard.
+- Kernel remover for those that build their own, or just to clean up.
+- Waypaper wallpaper setter used for wallpapers and background changers.
+- GRUB BG changer allows Selecting any .jpg or .png for your boot image.
+- Zram and Zswap choices can be changed on the fly, and survive reboot.
+- Logout theme changer for choosing icons and layout.
+- Random BG changer using 'Super+v'.
+- Ld-hotcorners providing four hotcorners for program use. 'Super + z'
+- Random BG Daemon from the Toggles menu, or using 'Super + Shift + r'.
+- Grimshot screenshot. Adds screenshots directly to ~/Pictures.
+- Fuzzel menu. (dmenu equivalent) (Super + F5)
+- Mako provides the system notifications.
+- Sway has gaps!
+- Optional Waydog installers for a few different items. VirtualBox,
+  kernels, extra themes, Conky, Dropbox, and more.
+
+There are only a few more programs to get you started. Firefox, Geany,
+Thunar, and Xfce4-terminal are standard for the main programs.  It is
+up to the user to select others.
+
+### Notes:
+Logging out of the different compositors requires different commands.
+If you have issues logging out to either SDDM or Ly, you may need to
+change the command used in /usr/local/bin/ld-logout.  Best practice 
+here is to copy ld-logout to ~/bin and make your changes there.
+
+### Building Waydog:
+No need to wait for a new release if wanting to keep up with the latest.
+In fact, this is a great way to make personal changes, and to help with
+testing new features.
+
+How to build Waydog, Beardog, and Lilidog on your system.
+
+Go to https://github.com/sleekmason to select the Trixie version you
+would like to build. Here, I am using the Waydog-Trixie release:
+
+1. `sudo apt install -y git live-build`
+2. `git clone https://github.com/sleekmason/Waydog-Trixie.git`
+3. `cd Waydog-Trixie`
+4. `sudo lb build`
+
+Wait for the build to finish and look for the ISO in the top folder.
+
+To make it your own:  
+Change stuff!
+
+Then:  
+`lb clean`  (cleans the configuration for the next build)  
+`lb build`
+
+Items to possibly change:  
+Waydog-Trixie/config/package-lists/my.list.chroot  (package list)  
+Waydog-Trixie/config/includes.chroot_after_packages/ (main files)
+
+Of course there are other files that can also be changed in the build,
+but maybe keep it simple for a run or two.
+
+Please post in the [Lilidog SourceForge Forum](https://sourceforge.net/projects/lilidog/) if you have any questions or issues.
+

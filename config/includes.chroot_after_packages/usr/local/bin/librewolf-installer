@@ -1,0 +1,43 @@
+#!/bin/bash
+echo ""
+read -p "   [0;33mLibrewolf Browser Installer[0m
+
+   This script will download and install the Librewolf Browser.
+   
+   Librewolf is a custom version of Firefox focused on privacy
+   security and freedom.
+   
+   [0;34mhttps://librewolf.net/[0m
+
+   New sources will be added to your apt reppository and a new
+   menu entry will appear in the Internet menu.
+
+   [0;32m------------------------------------------------------------
+   
+   Please press enter to install the Librewolf Browser.
+   
+   ------------------------------------------------------------[0m
+     
+    Or close this terminal window to quit the install." ;   
+    if : >/dev/tcp/8.8.8.8/53; then
+echo ""   
+echo ""
+sudo apt update && sudo apt install extrepo -y
+sudo extrepo enable librewolf
+sudo apt update && sudo apt install libgdk-pixbuf2.0-bin librewolf -y
+echo ""
+echo "----------------------------------------------------------------"
+echo ""
+echo "[0;32mDone![0m"
+echo ""
+echo "----------------------------------------------------------------"
+else
+echo ""
+ echo "   [0;31m-----------------------------------------------------[0m"
+ echo ""
+ echo "   [0;33mNo internet connection. Please connect and try again.[0m"
+ echo ""
+ echo "   [0;31m-----------------------------------------------------[0m"
+echo ""
+fi
+read -n1 -p " Press any key to quit this dialog ... "

@@ -1,0 +1,62 @@
+#!/bin/bash
+
+term="x-terminal-emulator"
+
+installers=(
+  "Batsignal|Batsignal Installer|batsignal-installer"
+  "Bluetooth|Bluetooth Installer|bluetooth-installer"
+  "Calibre Ebook|Calibre Installer|calibre-installer"
+  "Custom Conky|Conky Installer|conky-installer"
+  "Deb Optimizer|Debian Sources.list Optimizer|deb-source-location"
+  "Dropbox|Dropbox Installer|dropbox-installer"
+  "Extra Icons|Icon Installers|icon-installers|direct"
+  "Ghostty|Ghostty Installer|ghostty-installer"
+  "Hblock|Hblock Installer|hblock-installer"
+  "Kernels|Kernel Installers|kernel-installers|direct"
+  "Kitchen Sink|Kitchen Sink Installer|kitchensink-installer"
+  "Librewolf|Librewolf Browser Installer|librewolf-installer"
+  "Live Build|Live Build Apps Installer|live-build-apps-installer"
+  "Ly Login|Ly Display Manager Installer|ly-installer"
+  "Nano Editor|Nano Editor Installer|nano-installer"
+  "Printer Setup|Printing Installer|printer-installer"
+  "Qemu|Qemu Installer|qemu-installer"
+  "Radiotray-NG|Radiotray-NG Installer|radiotray-ng-installer"
+  "Sddm Login|SDDM Display Manager Installer|sddm-installer"
+  "Snap Store|Snap Installer|snap-installer"
+  "Virtualbox|Virtualbox Installer|virtualbox-installer-oracle"
+  "VSCodium|VSCodium Installer|vscodium-installer"
+  "Wine|Wine Installer|wine-installer"
+  "WM Installers|Window Manager Installers|window-manager-installers|direct"
+)
+
+fields=()
+
+for item in "${installers[@]}"; do
+  IFS='|' read -r label title cmd direct <<< "$item"
+  if [[ "$direct" == "direct" ]]; then
+    fields+=(
+      --field="$label":FBTN \
+      "$cmd &"
+    )
+  else
+    fields+=(
+      --field="$label":FBTN \
+      "$term -T \"$title\" -e bash -c \"$cmd\" &"
+    )
+  fi
+done
+
+yad --title="Waydog Installers" \
+    --escape-ok \
+    --form \
+    --width=524 --height=382 --center \
+    --borders=8 \
+    --columns=3 \
+    --buttons-layout=edge \
+    --window-icon=applications-utilities \
+    --text-align=center \
+    --button="Quick Installers!/usr/share/icons/gnome/22x22/apps/system-software-install.png:bash -c quickinstaller" \
+    --button="Synaptic!synaptic:bash -c 'gksudo synaptic'" \
+    --button="Close!gtk-ok:0" \
+    "${fields[@]}" \
+    2>/dev/null

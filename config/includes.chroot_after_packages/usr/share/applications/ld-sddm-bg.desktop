@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=sddm-bg
+Name=SDDM Login BG
+Icon=display
+Terminal=false
+GenericName=SDDM login background
+Categories=ld-misc-tools;
+Keywords=wallpapers;
+Comment=Change background

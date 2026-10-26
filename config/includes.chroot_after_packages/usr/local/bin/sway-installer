@@ -1,0 +1,70 @@
+#!/bin/bash
+read -p "   [0;33mSway Compositor Installer[0m
+
+    Sway is a tiling Wayland compositor and a drop-in replacement for
+    the i3 window manager for X11. It works with your existing i3
+    configuration and supports most of i3's features, plus a few
+    extras. This script will install Sway, and add a custom
+    configuration for Waydog use.
+    
+   [0;34mhttps://swaywm.org/[0m   
+   
+   [0;32m------------------------------------------------------------------
+
+   Please press enter to install the Sway Compositor.
+
+   ------------------------------------------------------------------[0m
+
+   Or, close this terminal window to quit the install." ;
+
+if : >/dev/tcp/8.8.8.8/53; then
+
+echo ""
+cd /tmp || exit
+rm -f "sway-1.11.zip"
+rm -fr "sway"
+wget --prefer-family=IPv4 https://raw.githubusercontent.com/sleekmason/packages/master/sway-1.11.zip --show-progress -q || exit
+unzip -q "sway-1.11.zip"
+sudo apt update
+sudo apt install -y \
+  /tmp/sway/libwlroots-0.19_0.19.3-wd1_amd64.deb \
+  /tmp/sway/sway_1.11-wd1_amd64.deb || exit
+
+if [ -e "$HOME/.config/sway" ]; then
+   rm -rf "$HOME/.config/sway.bak"
+   mv "$HOME/.config/sway" "$HOME/.config/sway.bak"
+fi
+cp -fr "/tmp/sway/sway" "$HOME/.config"
+sudo cp -f "/tmp/sway/sway-keys.sh" "/usr/local/bin"
+
+LAYOUT=$(grep '^XKBLAYOUT=' /etc/default/keyboard | cut -d'"' -f2)
+[[ -z "$LAYOUT" ]] && LAYOUT="us"
+sed -i "s|xkb_layout \"[^\"]*\"|xkb_layout \"$LAYOUT\"|" "$HOME/.config/sway/config"
+
+CONF="$HOME/.config/sway/config"
+sed -i -E \
+    -e 's|^exec --no-startup-id "/usr/local/bin/restore-wallpaper"$|#&|' \
+    -e 's|^exec --no-startup-id "waybar .*|#&|' \
+    -e 's|^exec --no-startup-id "nm-applet"$|#&|' \
+    -e 's|^exec --no-startup-id "mako"$|exec --no-startup-id "noctalia"|' "$CONF"
+grep -q '^exec --no-startup-id "noctalia"$' "$CONF" || echo 'exec --no-startup-id "noctalia"' >> "$CONF"
+
+echo ""
+echo "   [0;32m----------------------------------------------------------[0m"
+echo ""
+echo "   [0;33mAll Finished![0m"
+echo ""
+echo "   [0;32mThere should now be a new Sway entry at login. Enjoy Sway![0m"
+echo ""
+echo "   [0;32m----------------------------------------------------------[0m"
+echo ""
+else
+echo ""
+ echo "   [0;31m-----------------------------------------------------[0m"
+ echo ""
+ echo "   [0;33mNo Internet connection. Please connect and try again.[0m"
+ echo ""
+ echo "   [0;31m-----------------------------------------------------[0m"
+echo ""
+fi
+read -n1 -p " Press any key to quit this dialog ... "

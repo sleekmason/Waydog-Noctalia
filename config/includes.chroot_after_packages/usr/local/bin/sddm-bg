@@ -1,0 +1,35 @@
+#!/bin/bash
+# Made by sleekmason 30 nov 2025
+
+SDDM_BG="/usr/share/sddm/themes/fane/background.jpg"
+CURRENT_FILE="$HOME/.cache/waydog/wallpaper"
+WALL_DIR="/usr/share/backgrounds"
+
+if ! command -v sddm >/dev/null 2>&1; then
+    notify-send -i preferences-system -u low "Please install SDDM to use this feature."
+    exit 0
+fi
+
+current=""
+[[ -f "$CURRENT_FILE" ]] && current="$(head -n1 "$CURRENT_FILE")"
+if [[ -f "$current" ]]; then
+    start="$current"
+elif [[ -d "$WALL_DIR" ]]; then
+    start="$WALL_DIR/"
+else
+    start="$HOME/"
+fi
+
+selected_wallpaper="$(yad --file --add-preview --large-preview \
+    --title="SDDM Background Changer" --width=840 --height=600 --button="Apply:0" --button="Cancel:1" \
+    --file-filter="Images | *.png *.PNG *.jpg *.JPG *.jpeg *.JPEG *.webp" \
+    --filename="$start" 2>/dev/null)" || exit 0
+
+[[ -f "$selected_wallpaper" ]] || exit 0
+
+if pkexec cp -f "$selected_wallpaper" "$SDDM_BG"; then
+    NOTIFY_NAME=$(basename "$selected_wallpaper")
+    notify-send -i dialog-information --urgency low "SDDM Background changed to: $NOTIFY_NAME"
+fi
+
+exit 0

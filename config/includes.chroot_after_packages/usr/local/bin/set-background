@@ -1,0 +1,5 @@
+#!/bin/bash
+# Set wallpaper using Noctalia.
+# Made for Waydog by sleekmason 3 Dec 2025
+
+noctalia msg wallpaper-set "$1"

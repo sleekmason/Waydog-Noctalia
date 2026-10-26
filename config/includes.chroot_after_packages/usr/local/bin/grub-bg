@@ -1,0 +1,111 @@
+#!/bin/bash
+# Grub background changer for Waydog. Made by sleekmason 23 Oct 2026
+# NOTE: This script must be run from the system that controls GRUB for changes to occur.
+# Requires GraphicsMagick or ImageMagick to use.
+
+full_fs=$(df ~ | tail -1 | awk '{print $1}')
+fs=$(basename "$full_fs")
+if ! grep -q "$fs" /proc/partitions; then
+    notify-send -i preferences-system -u low "Not for use in a live environment."
+    exit 0
+fi
+
+if [[ "$1" == "--priv" ]]; then
+    TMP_PNG="$2"
+    PNG_NAME="$3"
+    READY_FILE="$4"
+    GRUB_DIR="/boot/grub"
+
+    touch "$READY_FILE"
+    chown --reference="$TMP_PNG" "$READY_FILE" 2>/dev/null
+
+    rm -f "$GRUB_DIR"/*.png "$GRUB_DIR"/*.jpg "$GRUB_DIR"/*.jpeg &&
+    cp -f "$TMP_PNG" "$GRUB_DIR/$PNG_NAME" &&
+    chmod 644 "$GRUB_DIR/$PNG_NAME" &&
+    update-grub
+
+    exit $?
+fi
+
+if ! command -v gm >/dev/null 2>&1 && ! command -v convert >/dev/null 2>&1; then
+    notify-send -i dialog-error "Please install GraphicsMagick or ImageMagick to continue."
+    exit 0
+fi
+
+CURRENT_FILE="$HOME/.cache/waydog/wallpaper"
+WALL_DIR="/usr/share/backgrounds"
+SCRIPT_PATH="$(readlink -f "$0")"
+
+current=""
+[[ -f "$CURRENT_FILE" ]] && current="$(head -n1 "$CURRENT_FILE")"
+if [[ -f "$current" ]]; then
+    start="$current"
+elif [[ -d "$WALL_DIR" ]]; then
+    start="$WALL_DIR/"
+else
+    start="$HOME/"
+fi
+
+(sleep 2; notify-send -i dialog-question -u low "Does this system control GRUB?" "(usually the last distro installed)") &
+
+selected_wallpaper="$(yad --file --add-preview --large-preview \
+    --title="GRUB Background Changer" --width=840 --height=600 --button="Apply:0" --button="Cancel:1" \
+    --file-filter="Images | *.png *.PNG *.jpg *.JPG *.jpeg *.JPEG *.webp" \
+    --filename="$start" 2>/dev/null)" || exit 0
+
+[[ -f "$selected_wallpaper" ]] || exit 0
+
+BASENAME=$(basename "$selected_wallpaper")
+PNG_NAME="${BASENAME%.*}.png"
+TMP_PNG=$(mktemp /tmp/grub-bg-XXXXXX.png)
+READY_FILE=$(mktemp /tmp/grub-bg-ready-XXXXXX)
+rm -f "$READY_FILE"
+trap 'rm -f "$TMP_PNG" "$READY_FILE"' EXIT
+
+if command -v gm >/dev/null 2>&1; then
+    gm convert "$selected_wallpaper" -type TrueColor "$TMP_PNG" 2>/dev/null
+elif command -v convert >/dev/null 2>&1; then
+    convert "$selected_wallpaper" -type TrueColor -depth 8 PNG24:"$TMP_PNG" 2>/dev/null
+fi
+
+if [[ ! -f "$TMP_PNG" || ! -s "$TMP_PNG" ]]; then
+    notify-send -i dialog-error "Image conversion failed."
+    exit 0
+fi
+
+notify-send -i dialog-password --urgency low "Please enter your password"
+
+pkexec "$SCRIPT_PATH" --priv "$TMP_PNG" "$PNG_NAME" "$READY_FILE" &
+PKPID=$!
+
+while kill -0 "$PKPID" 2>/dev/null; do
+    if [[ -f "$READY_FILE" ]]; then
+        break
+    fi
+    sleep 0.1
+done
+
+if [[ -f "$READY_FILE" ]]; then
+    yad --progress --pulsate --no-buttons --skip-taskbar --borders=10 \
+        --title="GRUB BG Changer" \
+        --image="preferences-desktop-wallpaper" \
+        --text=" Please allow GRUB to update before rebooting.\n (approx. 10-15 seconds)" \
+        --no-focus &
+    YAD_PID=$!
+fi
+
+wait "$PKPID"
+PKEXIT=$?
+
+if [[ -n "$YAD_PID" ]]; then
+    kill "$YAD_PID" 2>/dev/null
+    wait "$YAD_PID" 2>/dev/null
+fi
+
+if [[ $PKEXIT -eq 0 ]]; then
+    notify-send -i dialog-information --urgency low "GRUB background changed to: $PNG_NAME"
+else
+    notify-send -i dialog-information "GRUB update cancelled."
+fi
+
+exit 0

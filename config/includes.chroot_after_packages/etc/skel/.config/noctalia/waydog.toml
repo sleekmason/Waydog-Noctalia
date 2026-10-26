@@ -1,0 +1,64 @@
+[theme]
+wallpaper_scheme = "vibrant"
+source = "custom"
+custom_palette = "Dragon"
+    [theme.templates]
+    builtin_ids = [ "gtk3", "gtk4", "qt" ]
+
+[shell]
+setup_wizard_enabled = false
+
+[shell.launcher]
+default_view = "all"
+width = 560
+
+[shell.panel]
+launcher_position = "top_left"
+transparency_mode = "soft"
+
+[[shell.session.actions]]
+action = "lock"
+
+[[shell.session.actions]]
+action = "logout"
+command = "noctalia-logout"
+
+[[shell.session.actions]]
+action = "suspend"
+
+[[shell.session.actions]]
+action = "reboot"
+
+[[shell.session.actions]]
+action = "shutdown"
+
+[wallpaper]
+directory = "/usr/share/backgrounds/wallpapers"
+
+    [wallpaper.default]
+    path = "/usr/share/backgrounds/wallpapers/Default.jpg"
+
+    [wallpaper.last]
+    path = "/usr/share/backgrounds/wallpapers/Default.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/usr/share/backgrounds/wallpapers/Default.jpg"
+
+[widget.taskbar]
+show_all_outputs = true
+show_window_title = true
+window_title_max_width = 108
+
+[bar.default]
+start  = ["launcher", "wallpaper", "workspaces", "taskbar"]
+center = []
+end    = ["tray", "notifications", "clipboard", "bluetooth", "volume", "brightness", "battery", "clock",  "network", "control-center", "session"]
+
+[hooks]
+wallpaper_changed = 'mkdir -p "$HOME/.cache/waydog" && printf "%s\n" "$NOCTALIA_WALLPAPER_PATH" > "$HOME/.cache/waydog/wallpaper"'
+colors_changed = 'sleep 0.2; d="$HOME/.config/gtk-3.0"; cat "$d/noctalia.css" "$d/waydog-colors.css" > "$d/colors.css.tmp" && mv -f "$d/colors.css.tmp" "$d/colors.css"'
+
+[theme.templates.user.labwc]
+input_path  = "$XDG_CONFIG_HOME/noctalia/templates/labwc-themerc"
+output_path = "~/.local/share/themes/waydog/openbox-3/themerc"
+post_hook   = "restore-dragon"

@@ -1,0 +1,4 @@
+[org/gnome/desktop/interface]
+gtk-theme='adw-gtk3-dark'
+icon-theme='Obsidian'
+color-scheme='prefer-dark'

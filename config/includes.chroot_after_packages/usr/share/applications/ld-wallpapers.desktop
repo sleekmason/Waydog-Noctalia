@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=noctalia msg panel-toggle wallpaper
+Name=Wallpapers
+Icon=display
+Terminal=false
+GenericName=wallpaper setter
+Categories=ld-misc-tools;
+Keywords=wallpapers;
+Comment=Change wallpapers

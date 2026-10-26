@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Sexy Bash Prompt
+Exec=toggle.sexy
+StartupNotify=false
+Terminal=false
+Icon=utilities-system-monitor
+Categories=ld-misc-tools;

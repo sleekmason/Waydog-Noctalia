@@ -1,0 +1,15 @@
+
+    Thank you for installing Waydog. For any bugs
+    or other issues, please post in the forum:
+    
+    https://sourceforge.net/p/lilidog/discussion/
+    
+    Use 'Ctrl+Alt+k' to see the current keybinds.
+    
+    Look in the Utilities menu and the installers
+    for the programs most used in the build.
+
+    If you would like to customize your system by
+    answering some questions now, press the Begin
+    button below. Type 'welcome' in a terminal to
+    use the customization script at a later time.

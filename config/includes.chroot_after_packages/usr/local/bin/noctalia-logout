@@ -1,0 +1,22 @@
+#!/bin/bash
+# Same lines as in ld-logout. Wayfire doesn't play nicely otherwise.
+
+if pgrep -x labwc >/dev/null; then
+    labwc --exit
+elif [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]]; then
+    pkill -x Hyprland
+elif pgrep -x sway >/dev/null; then
+    swaymsg exit
+elif pgrep -x mango >/dev/null; then
+    mmsg dispatch quit
+elif pgrep -x niri >/dev/null; then
+    if pgrep -x sddm >/dev/null; then
+        pkill -TERM -x niri; chvt 2
+    else
+        niri msg action quit --skip-confirmation
+    fi
+elif pgrep -x wayfire >/dev/null; then
+    killall -s SIGTERM wayfire
+else
+    loginctl terminate-session "$XDG_SESSION_ID"
+fi

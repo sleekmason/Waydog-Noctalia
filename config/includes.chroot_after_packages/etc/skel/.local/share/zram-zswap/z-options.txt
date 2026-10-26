@@ -1,0 +1,83 @@
+                          Zram And Zswap Options
+                             
+  DESCRIPTION:
+  This dialog provides two options for compressed swap usage, along with
+  a separate swap cache flush button if needed.
+
+  On opening, the dialog will show if an option is currently active. Any
+  selections made are immediately enabled and any option change survives
+  reboot. Overall, the dialog should be fairly straightforward.
+
+  Zram is a compressed block device that sits in RAM working alongside
+  your existing swap. Those without a dedicated swap partition may
+  benefit most from using Zram.
+
+  Zswap is a compressed cache that sits in front of your actual swap,
+  intercepting and compressing pages that are then held in RAM until
+  needed. Zswap is generally a safe choice for most setups.
+
+  Do you need either one? No, but giving them a go shouldn't be an issue
+  either way. Several distributions enable Zswap by default, and a few
+  even have Zram as default.
+
+  Zram and Zswap shouldn't be used together. This dialog won't allow it
+  as a choice anyway, so no worries there.
+
+  REQUIREMENTS:
+  For Zswap, you need to have a swap partition or file available. The
+  dialog will still allow enabling of Zswap whether you have one or not.
+  If you add a swap partition later, Zswap will already be enabled.
+
+  Check to see if you have a swap partition with:
+  swapon --show
+  
+  For Zram, you may want to install an OOM killer. Currently, earlyoom
+  might be your best bet. Just install it and forget it unless wanting 
+  to configure it further. Systemd-oom is also an option. OOM killers 
+  are particularly useful on systems without a dedicated swap file or
+  partition, keeping your system from stalling if the memory runs out.
+
+  AFTER SELECTION:
+  # Zswap confirmation:
+  cat /sys/module/zswap/parameters/enabled
+  cat /sys/module/zswap/parameters/compressor
+
+  # Zram confirmation:
+  zramctl
+  swapon --show
+  lsmod | grep zram
+
+  Enabling Zram will also change four sysctl values for improved overall
+  performance.
+
+  # To see the sysctl values after enabling/disabling Zram:
+  sysctl vm.swappiness vm.watermark_boost_factor vm.watermark_scale_factor vm.page-cluster
+
+  Active:
+  vm.swappiness = 120
+  vm.watermark_boost_factor = 0
+  vm.watermark_scale_factor = 80
+  vm.page-cluster = 0
+
+  Disabled (standard kernel defaults restored):
+  vm.swappiness = 60
+  vm.watermark_boost_factor = 15000
+  vm.watermark_scale_factor = 10
+  vm.page-cluster = 3
+
+  These values can be changed within the script if desired. See:
+  /usr/local/bin/zram-zswap-toggle - lines 178 and 201.
+
+  FLUSH BUTTON:
+  The cache flush button forces the swapped pages back into RAM and then
+  reloads swap. There is a small chance this could hang or fail if there
+  isn't enough RAM to hold everything currently in swap. The system will
+  also still release cached pages as needed without intervention.
+
+  LINKS:
+  https://chrisdown.name/2026/03/24/zswap-vs-zram-when-to-use-what.html
+  https://www.reddit.com/r/archlinux/comments/1ivwv1l/zram_vs_zswap_vs_swap/
+  https://wiki.archlinux.org/title/Zram
+  https://wiki.archlinux.org/title/Zswap
+
+  This information file: ~/.local/share/zram-zwap/z-options.txt

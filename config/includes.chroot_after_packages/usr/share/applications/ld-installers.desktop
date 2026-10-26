@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Waydog Installers
+Exec=waydog-installers
+StartupNotify=false
+Terminal=false
+Icon=system-software-install
+Categories=ld-misc-tools;
