@@ -16,7 +16,7 @@ to log back in.
 - [Downloads](https://sourceforge.net/projects/lilidog/files/Releases/)
 
 #### Waydog Trixie
-[![2026-09-26T12-50-18-893874419-00-00.png](https://i.postimg.cc/Dw9n7vHJ/2026-09-26T12-50-18-893874419-00-00.png)](https://postimg.cc/BjBdg0q4)
+[![Waydog-noctalia.png](https://i.postimg.cc/ydzbjHMh/Waydog-noctalia.png)](https://postimg.cc/mc8jZ02h)
 
 ### Current Release Format:
 The version number shown is the date of the release beginning with the
