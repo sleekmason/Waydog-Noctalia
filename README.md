@@ -1,5 +1,6 @@
 ﻿Waydog is a lightweight Linux distro based on Debian Trixie. Waydog
-uses the new Wayland protocol for its display server.
+uses the new Wayland protocol for its display server. This is the
+Noctalia version.
 
 Labwc is installed as default, with separate installation options for
 Mango, Niri, Sway, and Wayfire compositors in the Waydog installers.
@@ -15,7 +16,7 @@ to log back in.
 - [SourceForge Main Page](https://sourceforge.net/projects/lilidog/)
 - [Downloads](https://sourceforge.net/projects/lilidog/files/Releases/)
 
-#### Waydog Trixie
+#### Waydog Trixie Noctalia
 [![Waydog-noctalia.png](https://i.postimg.cc/ydzbjHMh/Waydog-noctalia.png)](https://postimg.cc/mc8jZ02h)
 
 ### Current Release Format:
