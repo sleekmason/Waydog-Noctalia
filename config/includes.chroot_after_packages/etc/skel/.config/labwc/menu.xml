@@ -154,6 +154,11 @@
           <execute>osprober-toggle</execute>
         </action>
       </item>
+      <item label="Random BG Daemon" icon="preferences-desktop-wallpaper">
+        <action name="Execute">
+          <execute>toggle-random</execute>
+        </action>
+      </item>      
       <item label="Sexy Bash Prompt" icon="utilities-system-monitor">
         <action name="Execute">
           <execute>toggle.sexy</execute>

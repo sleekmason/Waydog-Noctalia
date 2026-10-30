@@ -1,0 +1,19 @@
+#!/bin/bash
+# Random background changer.
+# Made by sleekmason 13 Dec 2025
+
+CONF="${XDG_CONFIG_HOME:-$HOME/.config}/noctalia/waydog.toml"
+
+grep -q '^\[wallpaper\.automation\]' "$CONF" || printf '\n[wallpaper.automation]\nenabled = false\ninterval_seconds = 600\norder = "random"\n' >> "$CONF"
+
+STATE=$(sed -n '/^\[wallpaper\.automation\]/,/^\[/{s/^enabled *= *//p}' "$CONF")
+SECS=$(sed -n '/^\[wallpaper\.automation\]/,/^\[/{s/^interval_seconds *= *//p}' "$CONF")
+MIN=$(( ${SECS:-600} / 60 ))
+
+if [ "$STATE" = "true" ]; then
+    sed -i '/^\[wallpaper\.automation\]/,/^\[/{s/^enabled *=.*/enabled = false/}' "$CONF"
+    notify-send -i preferences-desktop-wallpaper "Random BG disabled"
+else
+    sed -i '/^\[wallpaper\.automation\]/,/^\[/{s/^enabled *=.*/enabled = true/}' "$CONF"
+    notify-send -i preferences-desktop-wallpaper "Random BG $MIN min." "Change time in ~/.config/noctalia/waydog.toml"
+fi

@@ -367,6 +367,11 @@
         <command>noctalia msg wallpaper-random</command>
       </action>
     </keybind>
+    <keybind key="W-S-r">
+      <action name="Execute">
+        <command>toggle-random</command>
+      </action>
+    </keybind>    
     <!-- Gamma -->
     <keybind key="W-g">
       <action name="Execute">

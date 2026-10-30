@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=Fuzzel BG Sync
-Exec=toggle-fuzzel-background.sh
+Name=Random BG Daemon
+Exec=toggle-random
 StartupNotify=false
 Terminal=false
-Icon=applications-graphics
+Icon=preferences-desktop-wallpaper
 Categories=ld-misc-tools;
