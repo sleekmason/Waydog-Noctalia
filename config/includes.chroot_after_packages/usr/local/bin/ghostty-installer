@@ -37,6 +37,7 @@ sudo apt update && sudo apt install -y /tmp/ghostty_1.3.1-1_amd64.deb
 mkdir -p "$HOME/.config/ghostty"
 cp -f "/tmp/ghostty/config.ghostty" "$HOME/.config/ghostty"
 
+setsid -f ghostty-noctalia-fix >/dev/null 2>&1
 echo ""
 echo " [0;32m-------------------------------------------------------------------"
 echo ""

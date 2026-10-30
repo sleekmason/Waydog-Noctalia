@@ -57,6 +57,7 @@ end    = ["tray", "notifications", "clipboard", "bluetooth", "volume", "brightne
 [hooks]
 wallpaper_changed = 'mkdir -p "$HOME/.cache/waydog" && printf "%s\n" "$NOCTALIA_WALLPAPER_PATH" > "$HOME/.cache/waydog/wallpaper"'
 colors_changed = 'sleep 0.2; d="$HOME/.config/gtk-3.0"; cat "$d/noctalia.css" "$d/waydog-colors.css" > "$d/colors.css.tmp" && mv -f "$d/colors.css.tmp" "$d/colors.css"'
+started = "ghostty-noctalia-fix &"
 
 [theme.templates.user.labwc]
 input_path  = "$XDG_CONFIG_HOME/noctalia/templates/labwc-themerc"

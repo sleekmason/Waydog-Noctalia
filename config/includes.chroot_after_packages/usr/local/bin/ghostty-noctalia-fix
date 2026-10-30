@@ -1,0 +1,22 @@
+#!/bin/bash
+# uses inotify to restore the Dragon theme after switching from custom and back.
+dir="${XDG_CONFIG_HOME:-$HOME/.config}/ghostty"
+f="$dir/config.ghostty"
+[ -d "$dir" ] || exit 0
+pkill -f "inotifywait.*$dir" 2>/dev/null
+
+check() {
+    [ -f "$f" ] || return
+    grep -qE '^theme\s*=' "$f" && return
+    if grep -q '^font-family' "$f"; then
+        sed -i '0,/^font-family/s//theme = Dragon\n&/' "$f"
+    else
+        echo 'theme = Dragon' >> "$f"
+    fi
+}
+
+check
+while inotifywait -qq -e close_write,moved_to "$dir"; do
+    sleep 0.3
+    check
+done
