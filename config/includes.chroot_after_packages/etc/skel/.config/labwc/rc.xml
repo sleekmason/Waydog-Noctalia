@@ -356,6 +356,11 @@
         <command>noctalia msg bar-toggle</command>
       </action>
     </keybind>
+    <keybind key="W-S-w">
+      <action name="Execute">
+        <command>noctalia msg settings-toggle</command>
+      </action>
+    </keybind>    
     <!-- Wallpaper -->
     <keybind key="W-v">
       <action name="Execute">

@@ -17,10 +17,10 @@ if : >/dev/tcp/8.8.8.8/53; then
 
 echo ""
 cd /tmp || exit
-rm -f "mango-0.14.4.zip"
+rm -f "mango-0.14.4-noctalia.zip"
 rm -fr "mango"
-wget --prefer-family=IPv4 https://raw.githubusercontent.com/sleekmason/packages/master/mango-0.14.4.zip --show-progress -q || exit
-unzip -q "mango-0.14.4.zip"
+wget --prefer-family=IPv4 https://raw.githubusercontent.com/sleekmason/packages-noctalia/master/mango-0.14.4-noctalia.zip --show-progress -q || exit
+unzip -q "mango-0.14.4-noctalia.zip"
 sudo apt update
 sudo apt install -y \
   /tmp/mango/libscenefx-0.4_0.4.1-wd1_amd64.deb \
@@ -40,14 +40,6 @@ sudo cp -f "/tmp/mango/mango-keys.sh" "/usr/local/bin"
 LAYOUT=$(grep '^XKBLAYOUT=' /etc/default/keyboard | cut -d'"' -f2)
 [[ -z "$LAYOUT" ]] && LAYOUT="us"
 sed -i "s|^xkb_rules_layout=.*|xkb_rules_layout=$LAYOUT|" "$HOME/.config/mango/config.conf"
-
-CONF="$HOME/.config/mango/config.conf"
-sed -i -E \
-    -e 's|^exec-once=/usr/local/bin/restore-wallpaper$|#&|' \
-    -e 's|^exec-once=waybar .*|#&|' \
-    -e 's|^exec-once=nm-applet$|#&|' \
-    -e 's|^exec-once=mako$|exec-once=noctalia|' "$CONF"
-grep -q '^exec-once=noctalia$' "$CONF" || echo 'exec-once=noctalia' >> "$CONF"
 
 echo "   [0;32m--------------------------------------------------------[0m"
 echo ""

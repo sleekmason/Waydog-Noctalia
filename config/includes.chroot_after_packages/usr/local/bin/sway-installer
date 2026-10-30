@@ -21,10 +21,10 @@ if : >/dev/tcp/8.8.8.8/53; then
 
 echo ""
 cd /tmp || exit
-rm -f "sway-1.11.zip"
+rm -f "sway-1.11-noctalia.zip"
 rm -fr "sway"
-wget --prefer-family=IPv4 https://raw.githubusercontent.com/sleekmason/packages/master/sway-1.11.zip --show-progress -q || exit
-unzip -q "sway-1.11.zip"
+wget --prefer-family=IPv4 https://raw.githubusercontent.com/sleekmason/packages-noctalia/master/sway-1.11-noctalia.zip --show-progress -q || exit
+unzip -q "sway-1.11-noctalia.zip"
 sudo apt update
 sudo apt install -y \
   /tmp/sway/libwlroots-0.19_0.19.3-wd1_amd64.deb \
@@ -40,14 +40,6 @@ sudo cp -f "/tmp/sway/sway-keys.sh" "/usr/local/bin"
 LAYOUT=$(grep '^XKBLAYOUT=' /etc/default/keyboard | cut -d'"' -f2)
 [[ -z "$LAYOUT" ]] && LAYOUT="us"
 sed -i "s|xkb_layout \"[^\"]*\"|xkb_layout \"$LAYOUT\"|" "$HOME/.config/sway/config"
-
-CONF="$HOME/.config/sway/config"
-sed -i -E \
-    -e 's|^exec --no-startup-id "/usr/local/bin/restore-wallpaper"$|#&|' \
-    -e 's|^exec --no-startup-id "waybar .*|#&|' \
-    -e 's|^exec --no-startup-id "nm-applet"$|#&|' \
-    -e 's|^exec --no-startup-id "mako"$|exec --no-startup-id "noctalia"|' "$CONF"
-grep -q '^exec --no-startup-id "noctalia"$' "$CONF" || echo 'exec --no-startup-id "noctalia"' >> "$CONF"
 
 echo ""
 echo "   [0;32m----------------------------------------------------------[0m"

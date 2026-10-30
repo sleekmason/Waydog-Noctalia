@@ -24,7 +24,7 @@ echo ""
 cd /tmp || exit
 rm -f "labwc-0.9.7-noctalia.zip"
 rm -fr "labwc"
-wget --prefer-family=IPv4 https://raw.githubusercontent.com/sleekmason/packages/master/labwc-0.9.7-noctalia.zip --show-progress -q || exit
+wget --prefer-family=IPv4 https://raw.githubusercontent.com/sleekmason/packages-noctalia/master/labwc-0.9.7-noctalia.zip --show-progress -q || exit
 unzip -q "labwc-0.9.7-noctalia.zip"
 sudo apt update
 sudo apt install -y /tmp/labwc/libwlroots-0.19_0.19.3-wd1_amd64.deb || exit

@@ -24,17 +24,17 @@ read -p "   [0;33mWayfire Compositor Installer[0m
 if : >/dev/tcp/8.8.8.8/53; then
 echo ""
 cd /tmp || exit
-rm -f "wayfire-0.10.0.zip"
+rm -f "wayfire-0.10.0-noctalia.zip"
 rm -fr "wayfire"
-wget --prefer-family=IPv4 https://raw.githubusercontent.com/sleekmason/packages/master/wayfire-0.10.0.zip --show-progress -q || exit
-unzip -q "/tmp/wayfire-0.10.0.zip"
+wget --prefer-family=IPv4 https://raw.githubusercontent.com/sleekmason/packages-noctalia/master/wayfire-0.10.0-noctalia.zip --show-progress -q || exit
+unzip -q "/tmp/wayfire-0.10.0-noctalia.zip"
 
 sudo apt update && \
 sudo apt install -y \
 /tmp/wayfire/libwlroots-0.19_0.19.3-wd1_amd64.deb \
 /tmp/wayfire/wayfire_0.10.0-wd1_amd64.deb || exit
 
-sudo apt install -y cbatticon upower
+sudo apt install -y upower
 
 backup_item=("wayfire.ini")
 
@@ -61,11 +61,6 @@ sudo cp -f "/tmp/wayfire/wayfire-keys.sh" "/usr/local/bin"
 LAYOUT=$(grep '^XKBLAYOUT=' /etc/default/keyboard | cut -d'"' -f2)
 [[ -z "$LAYOUT" ]] && LAYOUT="us"
 sed -i "s|^# *xkb_layout = .*|xkb_layout = $LAYOUT|" "$HOME/.config/wayfire.ini"
-
-CONF="$HOME/.config/wayfire.ini"
-sed -i -E 's|^nm-applet = nm-applet$|# &|' "$CONF"
-sed -i -E 's|^autostart_wf_shell = true$|autostart_wf_shell = false|' "$CONF"
-grep -q '^noctalia = noctalia$' "$CONF" || sed -i '/^\[autostart\]$/a noctalia = noctalia' "$CONF"
 
 ## Explain items.
 echo "   [0;32m--------------------------------------------------------[0m"

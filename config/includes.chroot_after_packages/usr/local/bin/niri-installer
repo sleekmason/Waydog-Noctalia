@@ -21,10 +21,10 @@ if : >/dev/tcp/8.8.8.8/53; then
 
 echo ""
 cd /tmp || exit
-rm -f "niri-trixie.zip"
+rm -f "niri-25.11-1-noctalia.zip"
 rm -fr "niri"
-wget --prefer-family=IPv4 https://raw.githubusercontent.com/sleekmason/packages/master/niri-trixie.zip --show-progress -q || exit
-unzip -q "/tmp/niri-trixie.zip"
+wget --prefer-family=IPv4 https://raw.githubusercontent.com/sleekmason/packages-noctalia/master/niri-25.11-1-noctalia.zip --show-progress -q || exit
+unzip -q "/tmp/niri-25.11-1-noctalia.zip"
 cd /tmp/niri
 sudo apt update
 sudo apt install -y ./niri_25.11-1_amd64.deb || exit
@@ -46,14 +46,6 @@ sudo cp -f "/tmp/niri/xwayland-satellite" "/usr/local/bin"
 LAYOUT=$(grep '^XKBLAYOUT=' /etc/default/keyboard | cut -d'"' -f2)
 [[ -z "$LAYOUT" ]] && LAYOUT="us"
 perl -i -0pe 's|(xkb \{[^}]*)layout "[^"]*"|\1layout "'$LAYOUT'"|s' "$HOME/.config/niri/config.kdl"
-
-CONF="$HOME/.config/niri/config.kdl"
-sed -i -E \
-    -e 's|^spawn-sh-at-startup "waybar .*|//&|' \
-    -e 's|^spawn-at-startup "nm-applet"$|//&|' \
-    -e 's|^spawn-at-startup "/usr/local/bin/restore-wallpaper"$|//&|' \
-    -e 's|^spawn-at-startup "mako"$|spawn-at-startup "noctalia"|' "$CONF"
-grep -q '^spawn-at-startup "noctalia"$' "$CONF" || echo 'spawn-at-startup "noctalia"' >> "$CONF"
 
 ## Explain items.
 echo "   [0;32m--------------------------------------------------------[0m"
