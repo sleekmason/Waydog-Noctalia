@@ -1,5 +1,5 @@
 # Waydog.toml - Various distro default fallback settings. Use this
-# file for permanant additions like hooks, and consider editing
+# file for permanent additions like hooks, and consider editing
 # ~/.local/share/noctalia/settings.toml first if the settings
 # dialog doesn't offer what you need.
 
