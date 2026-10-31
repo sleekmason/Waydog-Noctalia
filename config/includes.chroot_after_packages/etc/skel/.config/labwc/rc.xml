@@ -389,6 +389,12 @@
         <command>~/.config/conky/scripts/conky-chooser</command>
       </action>
     </keybind>
+    <!-- Hotcorners -->
+    <keybind key="W-z">
+      <action name="Execute">
+        <command>hotcorners-toggle</command>
+      </action>
+    </keybind>    
     <!-- Help -->
     <keybind key="W-F1">
       <action name="Execute">

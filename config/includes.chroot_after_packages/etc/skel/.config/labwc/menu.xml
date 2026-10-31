@@ -139,6 +139,11 @@
           <execute>wlr-gamma-gui</execute>
         </action>
       </item>
+      <item label="Hotcorners  On/Off" icon="preferences-desktop-accessibility">
+        <action name="Execute">
+          <execute>hotcorners-toggle</execute>
+        </action>
+      </item>      
       <item label="Menu Icons On/Off" icon="applications-engineering">
         <action name="Execute">
           <execute>menu-icons-toggle</execute>
