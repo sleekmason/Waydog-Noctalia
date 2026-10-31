@@ -12,11 +12,6 @@ directory = "/usr/share/backgrounds/wallpapers"
     [wallpaper.default]
     path = "/usr/share/backgrounds/wallpapers/Default.jpg"
 
-    [wallpaper.automation]
-    enabled = false
-    interval_seconds = 600
-    order = "random"
-
 [notification]
 scale = 0.90000000596046448
 show_app_name = false
