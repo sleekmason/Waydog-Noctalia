@@ -5,8 +5,8 @@
 hot_toggle="hot_corners.enabled"
 if [ "$(noctalia msg config-get "$hot_toggle")" = "true" ]; then
     noctalia msg config-set "$hot_toggle" false
-    notify-send -i preferences-desktop "Hot corners off"
+    notify-send -i preferences-desktop "Hotcorners off"
 else
     noctalia msg config-set "$hot_toggle" true
-    notify-send -i preferences-desktop "Hot corners on"
+    notify-send -i preferences-desktop "Hotcorners on"
 fi
