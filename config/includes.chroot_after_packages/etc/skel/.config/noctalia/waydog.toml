@@ -1,26 +1,7 @@
-[theme]
-wallpaper_scheme = "vibrant"
-source = "custom"
-custom_palette = "Dragon"
-    [theme.templates]
-    builtin_ids = [ "gtk3", "gtk4", "qt" ]
-
-[wallpaper.automation]
-enabled = false
-interval_seconds = 600
-order = "random"
-
 [shell]
 setup_wizard_enabled = false
 
-[shell.launcher]
-default_view = "all"
-width = 560
-
-[shell.panel]
-launcher_position = "top_left"
-transparency_mode = "soft"
-
+## Custom logout (works on all compositors). Editing session buttons in Settings replaces this list.
 [[shell.session.actions]]
 action = "lock"
 
@@ -37,34 +18,60 @@ action = "reboot"
 [[shell.session.actions]]
 action = "shutdown"
 
+## Fallbacks (also in settings.toml)
+[theme]
+wallpaper_scheme = "vibrant"
+source = "custom"
+custom_palette = "Dragon"
+
+    [theme.templates]
+    builtin_ids = [ "gtk3", "gtk4", "qt" ]
+
+    [theme.templates.user.labwc]
+    input_path  = "$XDG_CONFIG_HOME/noctalia/templates/labwc-themerc"
+    output_path = "~/.local/share/themes/waydog/openbox-3/themerc"
+    post_hook   = "restore-dragon"
+
 [wallpaper]
 directory = "/usr/share/backgrounds/wallpapers"
 
     [wallpaper.default]
     path = "/usr/share/backgrounds/wallpapers/Default.jpg"
 
-    [wallpaper.last]
-    path = "/usr/share/backgrounds/wallpapers/Default.jpg"
-
-    [wallpaper.monitors.eDP-1]
-    path = "/usr/share/backgrounds/wallpapers/Default.jpg"
-
-[widget.taskbar]
-show_all_outputs = true
-show_window_title = true
-window_title_max_width = 108
-
 [bar.default]
 start  = ["launcher", "wallpaper", "workspaces", "taskbar"]
 center = []
-end    = ["tray", "notifications", "clipboard", "bluetooth", "volume", "brightness", "battery", "clock",  "network", "control-center", "session"]
+end    = ["tray", "notifications", "clipboard", "bluetooth", "volume", "brightness", "battery", "clock", "network", "hotcorners", "control-center", "session"]
+
+[widget.hotcorners]
+type = "custom_button"
+glyph = "scan-eye"
+tooltip = "Hotcorners: Left-click ▸ toggle on/off Right-click ▸ settings"
+
+    [widget.hotcorners.actions]
+    left = "exec hotcorners-toggle"
+    right = "exec noctalia msg settings-open desktop"
+
+[hot_corners]
+enabled = false
+
+    [hot_corners.bottom_left]
+    action = "command"
+    command = "x-terminal-emulator"
+
+    [hot_corners.bottom_right]
+    action = "command"
+    command = "ld-logout"
+
+    [hot_corners.top_left]
+    action = "command"
+    command = "thunar"
+
+    [hot_corners.top_right]
+    action = "command"
+    command = "noctalia msg wallpaper-random"
 
 [hooks]
 wallpaper_changed = 'mkdir -p "$HOME/.cache/waydog" && printf "%s\n" "$NOCTALIA_WALLPAPER_PATH" > "$HOME/.cache/waydog/wallpaper"'
 colors_changed = 'sleep 0.2; d="$HOME/.config/gtk-3.0"; cat "$d/noctalia.css" "$d/waydog-colors.css" > "$d/colors.css.tmp" && mv -f "$d/colors.css.tmp" "$d/colors.css"'
 started = "ghostty-noctalia-fix &"
-
-[theme.templates.user.labwc]
-input_path  = "$XDG_CONFIG_HOME/noctalia/templates/labwc-themerc"
-output_path = "~/.local/share/themes/waydog/openbox-3/themerc"
-post_hook   = "restore-dragon"

@@ -1,8 +1,12 @@
 #!/bin/bash
-if pgrep -f "python3.*ld-hotcorners" > /dev/null; then
-    pkill -f "python3.*ld-hotcorners"
-    notify-send -i dialog-information "Hotcorners Off"
+# Hotcorners toggle for noctalia
+# Made by sleekmason 31 Oct 2026
+
+hot_toggle="hot_corners.enabled"
+if [ "$(noctalia msg config-get "$hot_toggle")" = "true" ]; then
+    noctalia msg config-set "$hot_toggle" false
+    notify-send -i preferences-desktop "Hot corners off"
 else
-    ld-hotcorners &
-    notify-send -i dialog-information "Hotcorners On"
+    noctalia msg config-set "$hot_toggle" true
+    notify-send -i preferences-desktop "Hot corners on"
 fi

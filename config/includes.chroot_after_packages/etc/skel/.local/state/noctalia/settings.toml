@@ -1,0 +1,56 @@
+[theme]
+wallpaper_scheme = "vibrant"
+source = "custom"
+custom_palette = "Dragon"
+
+    [theme.templates]
+    builtin_ids = [ "gtk3", "gtk4", "qt" ]
+
+[wallpaper]
+directory = "/usr/share/backgrounds/wallpapers"
+
+    [wallpaper.default]
+    path = "/usr/share/backgrounds/wallpapers/Default.jpg"
+
+    [wallpaper.automation]
+    enabled = false
+    interval_seconds = 600
+    order = "random"
+
+[shell.launcher]
+default_view = "all"
+width = 560
+
+[shell.panel]
+launcher_position = "top_left"
+transparency_mode = "soft"
+
+[bar.default]
+start  = ["launcher", "wallpaper", "workspaces", "taskbar"]
+center = []
+end    = ["tray", "notifications", "clipboard", "bluetooth", "volume", "brightness", "battery", "clock", "network", "hotcorners", "control-center", "session"]
+background_opacity = 0.8
+
+[widget.taskbar]
+show_all_outputs = true
+show_window_title = true
+window_title_max_width = 108
+
+[hot_corners]
+enabled = false
+
+    [hot_corners.bottom_left]
+    action = "command"
+    command = "x-terminal-emulator"
+
+    [hot_corners.bottom_right]
+    action = "command"
+    command = "ld-logout"
+
+    [hot_corners.top_left]
+    action = "command"
+    command = "thunar"
+
+    [hot_corners.top_right]
+    action = "command"
+    command = "noctalia msg wallpaper-random"

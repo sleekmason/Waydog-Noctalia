@@ -10,11 +10,13 @@ STATE=$(sed -n '/^\[wallpaper\.automation\]/,/^\[/{s/^enabled *= *//p}' "$CONF")
 SECS=$(sed -n '/^\[wallpaper\.automation\]/,/^\[/{s/^interval_seconds *= *//p}' "$CONF")
 MIN=$(( ${SECS:-600} / 60 ))
 
-if [ "$STATE" = "true" ]; then
-    sed -i '/^\[wallpaper\.automation\]/,/^\[/{s/^enabled *=.*/enabled = false/}' "$CONF"
+KEY="wallpaper.automation.enabled"
+if [ "$(noctalia msg config-get "$KEY")" = "true" ]; then
+    noctalia msg config-set "$KEY" false
     notify-send -i preferences-desktop-wallpaper "Random BG disabled"
 else
-    sed -i '/^\[wallpaper\.automation\]/,/^\[/{s/^enabled *=.*/enabled = true/}' "$CONF"
+    noctalia msg config-set "$KEY" true
     noctalia msg wallpaper-random
-    notify-send -i preferences-desktop-wallpaper "Random BG $MIN min." "Change time in ~/.config/noctalia/waydog.toml"
+    MIN=$(( $(noctalia msg config-get wallpaper.automation.interval_seconds) / 60 ))
+    notify-send -i preferences-desktop-wallpaper "Random BG $MIN min." "Change time in ~/.local/state/noctalia/settings.toml"
 fi
