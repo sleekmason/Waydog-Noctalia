@@ -1,7 +1,6 @@
 [shell]
 setup_wizard_enabled = false
 
-## Custom logout (works on all compositors). Editing session buttons in Settings replaces this list.
 [[shell.session.actions]]
 action = "lock"
 
@@ -18,7 +17,6 @@ action = "reboot"
 [[shell.session.actions]]
 action = "shutdown"
 
-## Fallbacks (also in settings.toml)
 [theme]
 wallpaper_scheme = "vibrant"
 source = "custom"
