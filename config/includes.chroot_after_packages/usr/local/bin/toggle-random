@@ -15,6 +15,9 @@ if [ "$(noctalia msg config-get "$KEY")" = "true" ]; then
     noctalia msg config-set "$KEY" false
     notify-send -i preferences-desktop-wallpaper "Random BG disabled"
 else
+    S="${XDG_STATE_HOME:-$HOME/.local/state}/noctalia/settings.toml"
+    grep -qE '^\s*interval_seconds\s*=' "$S" 2>/dev/null || \
+        noctalia msg config-set wallpaper.automation.interval_seconds 600
     noctalia msg config-set "$KEY" true
     noctalia msg wallpaper-random
     MIN=$(( $(noctalia msg config-get wallpaper.automation.interval_seconds) / 60 ))
