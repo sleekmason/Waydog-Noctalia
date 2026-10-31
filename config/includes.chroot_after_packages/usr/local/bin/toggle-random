@@ -15,5 +15,6 @@ if [ "$STATE" = "true" ]; then
     notify-send -i preferences-desktop-wallpaper "Random BG disabled"
 else
     sed -i '/^\[wallpaper\.automation\]/,/^\[/{s/^enabled *=.*/enabled = true/}' "$CONF"
+    noctalia msg wallpaper-random
     notify-send -i preferences-desktop-wallpaper "Random BG $MIN min." "Change time in ~/.config/noctalia/waydog.toml"
 fi
