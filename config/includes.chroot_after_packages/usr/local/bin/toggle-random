@@ -2,14 +2,6 @@
 # Random background changer.
 # Made by sleekmason 13 Dec 2025
 
-CONF="${XDG_CONFIG_HOME:-$HOME/.config}/noctalia/waydog.toml"
-
-grep -q '^\[wallpaper\.automation\]' "$CONF" || printf '\n[wallpaper.automation]\nenabled = false\ninterval_seconds = 600\norder = "random"\n' >> "$CONF"
-
-STATE=$(sed -n '/^\[wallpaper\.automation\]/,/^\[/{s/^enabled *= *//p}' "$CONF")
-SECS=$(sed -n '/^\[wallpaper\.automation\]/,/^\[/{s/^interval_seconds *= *//p}' "$CONF")
-MIN=$(( ${SECS:-600} / 60 ))
-
 KEY="wallpaper.automation.enabled"
 if [ "$(noctalia msg config-get "$KEY")" = "true" ]; then
     noctalia msg config-set "$KEY" false
@@ -18,6 +10,8 @@ else
     S="${XDG_STATE_HOME:-$HOME/.local/state}/noctalia/settings.toml"
     grep -qE '^\s*interval_seconds\s*=' "$S" 2>/dev/null || \
         noctalia msg config-set wallpaper.automation.interval_seconds 600
+    grep -qE '^\s*order\s*=' "$S" 2>/dev/null || \
+        noctalia msg config-set wallpaper.automation.order "'random'"
     noctalia msg config-set "$KEY" true
     noctalia msg wallpaper-random
     MIN=$(( $(noctalia msg config-get wallpaper.automation.interval_seconds) / 60 ))

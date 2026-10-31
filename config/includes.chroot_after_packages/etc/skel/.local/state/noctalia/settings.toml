@@ -17,6 +17,10 @@ directory = "/usr/share/backgrounds/wallpapers"
     interval_seconds = 600
     order = "random"
 
+[notification]
+scale = 0.90000000596046448
+show_app_name = false
+
 [shell.launcher]
 default_view = "all"
 width = 560
