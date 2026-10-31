@@ -120,6 +120,7 @@ pciutils
 pcmciautils
 pipewire-audio
 powermgmt-base
+power-profiles-daemon
 python3-distro
 python3-notify2
 python3-pyxattr
