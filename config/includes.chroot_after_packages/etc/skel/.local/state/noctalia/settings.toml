@@ -57,4 +57,4 @@ enabled = false
 
     [hot_corners.top_right]
     action = "command"
-    command = "noctalia msg wallpaper-random"
+    command = "geany"

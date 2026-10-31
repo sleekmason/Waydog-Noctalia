@@ -1,3 +1,8 @@
+# Waydog.toml - Various distro default fallback settings. Use this
+# file for permanant additions like hooks, and consider editing
+# ~/.local/share/noctalia/settings.toml first if the settings
+# dialog doesn't offer what you need.
+
 [shell]
 setup_wizard_enabled = false
 
@@ -67,7 +72,7 @@ enabled = false
 
     [hot_corners.top_right]
     action = "command"
-    command = "noctalia msg wallpaper-random"
+    command = "geany"
 
 [hooks]
 wallpaper_changed = 'mkdir -p "$HOME/.cache/waydog" && printf "%s\n" "$NOCTALIA_WALLPAPER_PATH" > "$HOME/.cache/waydog/wallpaper"'
