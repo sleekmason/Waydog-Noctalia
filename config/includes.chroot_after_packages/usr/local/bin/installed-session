@@ -3,7 +3,7 @@
 # This script is for one time installed session use and can be removed if installed.
 
 # gsettings lines.
-gsettings set org.gnome.desktop.interface gtk-theme "Dragon"
+gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-dark"
 gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 gsettings set org.gnome.desktop.interface icon-theme "Obsidian"
 gsettings set org.gnome.desktop.interface font-name "Sans 11"
@@ -18,8 +18,6 @@ rm -f "$HOME"/.face.icon
 mkdir -p "$HOME/bin" "$HOME/.local/bin"
 # Add ~/Pictures and ~/Pictures/wallpapers
 mkdir -p Pictures/wallpapers
-# Remove waypaper line used in the live session from ~/.config/labwc/autostart
-sed -i '/import waypaper\.app/d' "$HOME/.config/labwc/autostart"
 # Keyboard settings for labwc
 LAYOUT=$(grep '^XKBLAYOUT=' /etc/default/keyboard | cut -d'"' -f2)
 [[ -z "$LAYOUT" ]] && LAYOUT="us"

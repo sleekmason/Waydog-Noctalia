@@ -3,7 +3,7 @@
 # This script is for live session use and can be removed if installed.
 
 # gsettings lines.
-gsettings set org.gnome.desktop.interface gtk-theme "Dragon"
+gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-dark"
 gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 gsettings set org.gnome.desktop.interface icon-theme "Obsidian"
 gsettings set org.gnome.desktop.interface font-name "Sans 11"
@@ -12,6 +12,8 @@ gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize
 # Remove errant mirror line.
 sudo sed -i '/file/d' /etc/apt/sources.list
 xdg-user-dirs-update
+# set thunar as default for inode/directory
+xdg-mime default thunar.desktop inode/directory
 # Remove face icons in $HOME
 rm -f "$HOME"/.face.icon
 # Add bin paths
