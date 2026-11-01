@@ -49,7 +49,7 @@ end    = ["tray", "hotcorners", "notifications", "clipboard", "bluetooth", "volu
 [widget.hotcorners]
 type = "custom_button"
 glyph = "scan-eye"
-tooltip = "Hotcorners: Left-Click ▸ toggle on/off Right-Click ▸ settings"
+tooltip = "Left-Click ▸ Hotcorners Toggle - Right-Click ▸ Settings"
 
     [widget.hotcorners.actions]
     left = "exec hotcorners-toggle"
