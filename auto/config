@@ -18,7 +18,7 @@ lb config noauto \
      --firmware-chroot 'true' \
      --security 'true' \
      --memtest 'memtest86+' \
-     --image-name 'Waydog-Trixie-Noctalia-26.10.31' \
+     --image-name 'Waydog-Trixie-Noctalia-26.11.01' \
      --iso-application 'Waydog-Trixie-Noctalia' \
      --iso-publisher 'Waydog-Trixie-Noctalia GNU/Linux' \
      --iso-volume 'Waydog-Trixie' \
