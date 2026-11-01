@@ -42,9 +42,9 @@ directory = "/usr/share/backgrounds/wallpapers"
     path = "/usr/share/backgrounds/wallpapers/Default.jpg"
 
 [bar.default]
-start  = ["launcher", "hotcorners", "wallpaper", "workspaces", "taskbar"]
+start  = ["launcher", "wallpaper", "workspaces", "taskbar"]
 center = []
-end    = ["tray", "notifications", "clipboard", "bluetooth", "volume", "brightness", "battery", "clock", "network", "control-center", "session"]
+end    = ["tray", "hotcorners", "notifications", "clipboard", "bluetooth", "volume", "brightness", "battery", "clock", "network", "control-center", "session"]
 
 [widget.hotcorners]
 type = "custom_button"
