@@ -25,9 +25,9 @@ launcher_position = "top_left"
 transparency_mode = "soft"
 
 [bar.default]
-start  = ["launcher", "wallpaper", "workspaces", "taskbar"]
+start  = ["launcher", "hotcorners", "wallpaper", "workspaces", "taskbar"]
 center = []
-end    = ["tray", "notifications", "clipboard", "bluetooth", "volume", "brightness", "battery", "clock", "network", "hotcorners", "control-center", "session"]
+end    = ["tray", "notifications", "clipboard", "bluetooth", "volume", "brightness", "battery", "clock", "network", "control-center", "session"]
 background_opacity = 0.8
 
 [widget.taskbar]

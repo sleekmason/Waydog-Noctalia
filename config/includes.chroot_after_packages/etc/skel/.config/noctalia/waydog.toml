@@ -42,14 +42,14 @@ directory = "/usr/share/backgrounds/wallpapers"
     path = "/usr/share/backgrounds/wallpapers/Default.jpg"
 
 [bar.default]
-start  = ["launcher", "wallpaper", "workspaces", "taskbar"]
+start  = ["launcher", "hotcorners", "wallpaper", "workspaces", "taskbar"]
 center = []
-end    = ["tray", "notifications", "clipboard", "bluetooth", "volume", "brightness", "battery", "clock", "network", "hotcorners", "control-center", "session"]
+end    = ["tray", "notifications", "clipboard", "bluetooth", "volume", "brightness", "battery", "clock", "network", "control-center", "session"]
 
 [widget.hotcorners]
 type = "custom_button"
 glyph = "scan-eye"
-tooltip = "Hotcorners: Left-click ▸ toggle on/off Right-click ▸ settings"
+tooltip = "Hotcorners: Left-Click ▸ toggle on/off Right-Click ▸ settings"
 
     [widget.hotcorners.actions]
     left = "exec hotcorners-toggle"
