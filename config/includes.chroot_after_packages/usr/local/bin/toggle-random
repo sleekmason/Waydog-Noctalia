@@ -15,5 +15,5 @@ else
     noctalia msg config-set "$KEY" true
     noctalia msg wallpaper-random
     MIN=$(( $(noctalia msg config-get wallpaper.automation.interval_seconds) / 60 ))
-    notify-send -i preferences-desktop-wallpaper "Random BG $MIN min." "Change time in ~/.local/state/noctalia/settings.toml"
+    notify-send -i preferences-desktop-wallpaper "Random BG $MIN min." "Change interval in Settings ▸ Wallpaper ▸ Automotion"
 fi
