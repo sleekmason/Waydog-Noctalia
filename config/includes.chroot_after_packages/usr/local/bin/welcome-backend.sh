@@ -35,7 +35,7 @@ sed -i '/welcome-backend.sh/d' "$HOME/.config/sway/config"
 # Launch welcome
 if command -v yad >/dev/null; then
   if [ "$MODE" = "installed" ]; then
-    yad --title "Welcome to Waydog!" \
+    yad --title "Welcome to Waydog Noctalia!" \
       --window-icon=/usr/share/icons/ld-icons/paw-color.png \
       --width=428 --height=350 --center \
       --escape-ok --undecorated --skip-taskbar \
@@ -45,9 +45,9 @@ if command -v yad >/dev/null; then
       < /usr/share/lilidog/welcome.txt \
       --fontname="JetBrains Mono Regular 10"
   else
-    yad --title "Welcome to Waydog!" \
+    yad --title "Welcome to Waydog Noctalia!" \
       --window-icon=/usr/share/icons/ld-icons/paw-color.png \
-      --width=428 --height=365 --center \
+      --width=428 --height=360 --center \
       --escape-ok --undecorated --skip-taskbar \
       --button="gtk-ok:0" \
       --text-info --justify=left --wrap \
