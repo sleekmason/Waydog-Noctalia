@@ -3625,10 +3625,10 @@ scrollbar slider {
   transition: all 200ms linear;
 }
 scrollbar slider:hover {
-  background-color: alpha(currentColor,0.4);
+  background-color: alpha(@accent_bg_color,0.6);
 }
 scrollbar slider:hover:active {
-  background-color: alpha(currentColor,0.6);
+  background-color: alpha(@accent_bg_color,0.9);
 }
 scrollbar slider:disabled {
   background-color: transparent;
@@ -3644,9 +3644,9 @@ scrollbar.overlay-indicator:not(.dragging):not(.hovering) {
 }
 scrollbar.overlay-indicator:not(.dragging):not(.hovering) slider {
   margin: 0;
-  min-width: 3px;
+  min-width: 6px;
   min-height: 3px;
-  background-color: @window_fg_color;
+  background-color: mix(@window_fg_color,@accent_color,0.5);
   border: 1px solid black;
 }
 scrollbar.overlay-indicator:not(.dragging):not(.hovering) button {
@@ -5041,7 +5041,7 @@ scrolledwindow viewport.frame {
   border-style: none;
 }
 scrolledwindow overshoot.top {
-  background-image: -gtk-gradient(radial, center top, 0, center top, 0.5, to(@window_fg_color), to(alpha(@window_fg_color,0))), -gtk-gradient(radial, center top, 0, center top, 0.6, from(alpha(@window_fg_color,0.07)), to(alpha(@window_fg_color,0)));
+  background-image: -gtk-gradient(radial, center top, 0, center top, 0.5, to(@accent_bg_color), to(alpha(@accent_bg_color,0))), -gtk-gradient(radial, center top, 0, center top, 0.6, from(alpha(@accent_bg_color,0.07)), to(alpha(@accent_bg_color,0)));
   background-size: 100% 5%, 100% 100%;
   background-repeat: no-repeat;
   background-position: center top;
@@ -5059,7 +5059,7 @@ scrolledwindow overshoot.top:backdrop {
   box-shadow: none;
 }
 scrolledwindow overshoot.bottom {
-  background-image: -gtk-gradient(radial, center bottom, 0, center bottom, 0.5, to(@window_fg_color), to(alpha(@window_fg_color,0))), -gtk-gradient(radial, center bottom, 0, center bottom, 0.6, from(alpha(@window_fg_color,0.07)), to(alpha(@window_fg_color,0)));
+  background-image: -gtk-gradient(radial, center bottom, 0, center bottom, 0.5, to(@accent_bg_color), to(alpha(@accent_bg_color,0))), -gtk-gradient(radial, center bottom, 0, center bottom, 0.6, from(alpha(@accent_bg_color,0.07)), to(alpha(@accent_bg_color,0)));
   background-size: 100% 5%, 100% 100%;
   background-repeat: no-repeat;
   background-position: center bottom;
