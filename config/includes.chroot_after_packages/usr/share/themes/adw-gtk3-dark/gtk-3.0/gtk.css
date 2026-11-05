@@ -449,7 +449,7 @@ notebook > header > tabs > arrow:active, notebook > header > tabs > arrow:checke
 button:active,
 button:checked {
   color: @window_fg_color;
-  background-color: mix(@window_fg_color,@window_bg_color,0.7);
+  background-color: alpha(@accent_color,0.2);
   box-shadow: none;
   text-shadow: none;
   -gtk-icon-shadow: none;
@@ -457,7 +457,8 @@ button:checked {
 notebook > header > tabs > arrow:active:hover, notebook > header > tabs > arrow:checked:hover,
 button:active:hover,
 button:checked:hover {
-  background-color: mix(@window_fg_color,@window_bg_color,0.65);
+  background-color: @accent_bg_color;
+  color: @accent_fg_color;
 }
 notebook > header > tabs > arrow:active, notebook > header > tabs > arrow:checked,
 button:active,
@@ -1285,7 +1286,7 @@ list.view.frame button.suggested-action:backdrop,
 list.view.frame > row:not(:selected):hover button.suggested-action:backdrop, popover.background button.suggested-action:backdrop, headerbar.selection-mode button:backdrop, headerbar.selection-mode button.text-button:backdrop:not(.suggested-action):not(.destructive-action):not(:disabled), .titlebar.selection-mode button:backdrop, .titlebar.selection-mode button.text-button:backdrop:not(.suggested-action):not(.destructive-action):not(:disabled), headerbar button.suggested-action.text-button:backdrop:not(.suggested-action):not(.destructive-action):not(:disabled), .titlebar button.suggested-action.text-button:backdrop:not(.suggested-action):not(.destructive-action):not(:disabled), headerbar .linked.raised button.suggested-action:backdrop,
 headerbar .linked button.suggested-action:backdrop:not(:only-child), headerbar > .stack-switcher.linked > button.suggested-action:backdrop, .titlebar .linked.raised button.suggested-action:backdrop,
 .titlebar .linked button.suggested-action:backdrop:not(:only-child), .titlebar > .stack-switcher.linked > button.suggested-action:backdrop, headerbar .linked entry ~ .suggested-action.image-button:backdrop, .titlebar .linked entry ~ .suggested-action.image-button:backdrop, headerbar button.suggested-action:backdrop:not(.titlebutton), .titlebar button.suggested-action:backdrop:not(.titlebutton), headerbar viewswitcher button.suggested-action.radio:backdrop:checked, .titlebar viewswitcher button.suggested-action.radio:backdrop:checked {
-  color: alpha(@accent_fg_color,0.5);
+  color: alpha(@accent_fg_color,0.7);
   background-color: mix(@accent_fg_color,alpha(@accent_bg_color,0.5),0.9);
   text-shadow: none;
   -gtk-icon-shadow: none;
@@ -2198,7 +2199,7 @@ headerbar.selection-mode button.toggle:active:hover {
 .selection-mode headerbar button:backdrop,
 headerbar.selection-mode button:backdrop.flat,
 headerbar.selection-mode button:backdrop {
-  color: alpha(@accent_fg_color,0.5);
+  color: alpha(@accent_fg_color,0.7);
   background-color: mix(@accent_fg_color,@accent_bg_color,0.9);
   text-shadow: none;
   -gtk-icon-shadow: none;
@@ -2214,7 +2215,7 @@ headerbar.selection-mode button:backdrop.flat:active,
 headerbar.selection-mode button:backdrop.flat:checked,
 headerbar.selection-mode button:backdrop:active,
 headerbar.selection-mode button:backdrop:checked {
-  color: alpha(@accent_fg_color,0.5);
+  color: alpha(@accent_fg_color,0.7);
   background-color: mix(@accent_fg_color,@accent_bg_color,0.7);
 }
 .selection-mode .titlebar:not(headerbar) button:backdrop:active:hover, .selection-mode .titlebar:not(headerbar) button:backdrop:checked:hover, .selection-mode.titlebar:not(headerbar) button:backdrop:active:hover, .selection-mode.titlebar:not(headerbar) button:backdrop:checked:hover,
@@ -2233,7 +2234,7 @@ headerbar.selection-mode button:backdrop:checked:hover {
 .selection-mode headerbar button:backdrop:disabled,
 headerbar.selection-mode button:backdrop.flat:disabled,
 headerbar.selection-mode button:backdrop:disabled {
-  color: alpha(@accent_fg_color,0.5);
+  color: alpha(@accent_fg_color,0.7);
   background-color: mix(@accent_fg_color,@accent_bg_color,0.9);
   text-shadow: none;
   -gtk-icon-shadow: none;
@@ -2247,7 +2248,7 @@ headerbar.selection-mode button:backdrop.flat:disabled:active,
 headerbar.selection-mode button:backdrop.flat:disabled:checked,
 headerbar.selection-mode button:backdrop:disabled:active,
 headerbar.selection-mode button:backdrop:disabled:checked {
-  color: alpha(@accent_fg_color,0.5);
+  color: alpha(@accent_fg_color,0.7);
   background-color: mix(@accent_fg_color,@accent_bg_color,0.7);
 }
 .selection-mode .titlebar:not(headerbar) button.flat:backdrop, .selection-mode .titlebar:not(headerbar) button.flat:disabled, .selection-mode.titlebar:not(headerbar) button.flat:backdrop, .selection-mode.titlebar:not(headerbar) button.flat:disabled,
@@ -2268,7 +2269,7 @@ headerbar.selection-mode button.flat:backdrop:disabled {
 .selection-mode .titlebar:not(headerbar) button:disabled, .selection-mode.titlebar:not(headerbar) button:disabled,
 .selection-mode headerbar button:disabled,
 headerbar.selection-mode button:disabled {
-  color: alpha(@accent_fg_color,0.5);
+  color: alpha(@accent_fg_color,0.7);
   background-color: mix(@accent_fg_color,@accent_bg_color,0.95);
   text-shadow: none;
   -gtk-icon-shadow: none;
@@ -2279,7 +2280,7 @@ headerbar.selection-mode button:disabled {
 .selection-mode headerbar button:disabled:checked,
 headerbar.selection-mode button:disabled:active,
 headerbar.selection-mode button:disabled:checked {
-  color: alpha(@accent_fg_color,0.5);
+  color: alpha(@accent_fg_color,0.7);
   background-color: mix(@accent_fg_color,@accent_bg_color,0.7);
   box-shadow: none;
 }
@@ -2362,7 +2363,7 @@ headerbar.selection-mode .selection-menu arrow {
 headerbar.selection-mode .selection-menu:backdrop .arrow,
 headerbar.selection-mode .selection-menu .arrow {
   -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
-  color: alpha(@accent_fg_color,0.5);
+  color: alpha(@accent_fg_color,0.7);
   -gtk-icon-shadow: none;
 }
 .tiled .titlebar:not(headerbar), .tiled-top .titlebar:not(headerbar), .tiled-right .titlebar:not(headerbar), .tiled-bottom .titlebar:not(headerbar), .tiled-left .titlebar:not(headerbar), .maximized .titlebar:not(headerbar), .fullscreen .titlebar:not(headerbar),
@@ -2560,7 +2561,7 @@ headerbar .linked button:not(:only-child):not(:last-child):not(:backdrop):active
   border-left-color: transparent;
 }
 headerbar.selection-mode button:hover:backdrop, .titlebar.selection-mode button:hover:backdrop {
-  color: alpha(@accent_fg_color,0.5);
+  color: alpha(@accent_fg_color,0.7);
   background-color: mix(@accent_fg_color,alpha(@accent_bg_color,0.5),0.9);
   text-shadow: none;
   -gtk-icon-shadow: none;
@@ -4003,7 +4004,7 @@ check:checked:disabled,
 radio:checked:disabled {
   box-shadow: none;
   background-image: image(@accent_bg_color);
-  color: alpha(@accent_fg_color,0.5);
+  color: alpha(@accent_fg_color,0.7);
   border-color: @accent_bg_color;
 }
 check:indeterminate,
@@ -4026,7 +4027,7 @@ check:indeterminate:disabled,
 radio:indeterminate:disabled {
   box-shadow: none;
   background-image: image(@accent_bg_color);
-  color: alpha(@accent_fg_color,0.5);
+  color: alpha(@accent_fg_color,0.7);
   border-color: @accent_bg_color;
 }
 .osd check,
