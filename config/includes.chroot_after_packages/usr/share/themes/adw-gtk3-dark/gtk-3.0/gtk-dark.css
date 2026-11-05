@@ -3130,7 +3130,8 @@ menubar > menuitem menu:dir(rtl) menuitem, menubar > menuitem menu:dir(ltr) menu
 }
 menubar > menuitem:hover,
 .menubar > menuitem:hover {
-  background-color: alpha(currentColor,0.1);
+  color: @accent_fg_color;
+  background-color: @accent_bg_color;
 }
 menubar > menuitem:disabled,
 .menubar > menuitem:disabled {
