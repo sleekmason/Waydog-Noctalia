@@ -449,7 +449,7 @@ notebook > header > tabs > arrow:active, notebook > header > tabs > arrow:checke
 button:active,
 button:checked {
   color: @window_fg_color;
-  background-color: alpha(@accent_color,0.2);
+  background-color: mix(@window_fg_color,@card_bg_color,0.98);
   box-shadow: none;
   text-shadow: none;
   -gtk-icon-shadow: none;
@@ -457,7 +457,7 @@ button:checked {
 notebook > header > tabs > arrow:active:hover, notebook > header > tabs > arrow:checked:hover,
 button:active:hover,
 button:checked:hover {
-  background-color: @accent_bg_color;
+  background-color: alpha(@accent_bg_color,0.36);
   color: @accent_fg_color;
 }
 notebook > header > tabs > arrow:active, notebook > header > tabs > arrow:checked,
@@ -724,14 +724,14 @@ button.suggested-action:hover {
 button.suggested-action:active,
 button.suggested-action:checked {
   color: white;
-  background-color: mix(white,@accent_bg_color,0.7);
+  background-color: mix(@window_bg_color, @accent_bg_color, 0.36);
   box-shadow: none;
   text-shadow: none;
   -gtk-icon-shadow: none;
 }
 button.suggested-action:active:hover,
 button.suggested-action:checked:hover {
-  background-color: mix(white,@accent_bg_color,0.65);
+  background-color: mix(@window_bg_color, @accent_bg_color, 0.36);
 }
 button.suggested-action.flat:disabled {
   border-color: transparent;
@@ -3153,7 +3153,7 @@ menu,
 .context-menu {
   margin: 4px;
   padding: 6px;
-  background-color: @popover_bg_color;
+  background-color: @view_bg_color;
   border: 1px solid mix(currentColor,@window_bg_color,0.85);
 }
 menu separator,
@@ -3617,8 +3617,8 @@ scrollbar {
 }
 scrollbar slider {
   color: @window_fg_color;
-  min-width: 8px;
-  min-height: 8px;
+  min-width: 10px;
+  min-height: 10px;
   margin: -1px;
   border: 4px solid transparent;
   border-radius: 10px;
@@ -7870,4 +7870,11 @@ window.background:not(.solid-csd):not(.csd) > notebook > stack:not(:only-child) 
 }
 #settingsDialog .dialog-vbox.vertical tab:checked:hover {
   background-color: mix(@window_fg_color,@window_bg_color,0.65);
+}
+
+headerbar button.suggested-action:active:hover:hover:not(.titlebutton),
+headerbar button.suggested-action:checked:hover:hover:not(.titlebutton),
+.titlebar button.suggested-action:active:hover:hover:not(.titlebutton),
+.titlebar button.suggested-action:checked:hover:hover:not(.titlebutton) {
+  background-color: mix(@headerbar_bg_color, @accent_bg_color, 0.36);
 }
