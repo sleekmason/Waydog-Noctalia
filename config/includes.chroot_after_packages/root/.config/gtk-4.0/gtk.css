@@ -4,6 +4,7 @@
 * stylelint-disable at-rule-no-unknown
 */
 
+/* App-scoped CSS of enabled community GTK extensions; Noctalia maintains this file. */
 
 @define-color accent_color #234f78;
 @define-color accent_bg_color #234f78;
@@ -106,5 +107,10 @@
     
     --shade-color: rgba(0, 0, 0, 0.36);
 }
+/* Waydog accent (GTK4). Strength is set by waydog-accent. */
+@define-color accent_bg_color shade(#234f78, 1.00);
 @define-color popover_bg_color @view_bg_color;
-:root { --popover-bg-color: var(--view-bg-color); }
+:root {
+    --accent-bg-color: shade(#234f78, 1.00);
+    --popover-bg-color: var(--view-bg-color);
+}

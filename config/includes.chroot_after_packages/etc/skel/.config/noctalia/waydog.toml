@@ -35,6 +35,14 @@ custom_palette = "Dragon"
     output_path = "~/.local/share/themes/waydog/openbox-3/themerc"
     post_hook   = "restore-dragon"
 
+    [theme.templates.user.waydog-gtk3]
+    input_path  = "$XDG_CONFIG_HOME/noctalia/templates/waydog-gtk3.css"
+    output_path = "$XDG_CONFIG_HOME/gtk-3.0/waydog-colors.css"
+
+    [theme.templates.user.waydog-gtk4]
+    input_path  = "$XDG_CONFIG_HOME/noctalia/templates/waydog-gtk4.css"
+    output_path = "$XDG_CONFIG_HOME/gtk-4.0/waydog-colors.css"
+
 [wallpaper]
 directory = "/usr/share/backgrounds/wallpapers"
 
@@ -42,9 +50,18 @@ directory = "/usr/share/backgrounds/wallpapers"
     path = "/usr/share/backgrounds/wallpapers/Default.jpg"
 
 [bar.default]
-start  = ["launcher", "wallpaper", "workspaces", "taskbar"]
+start  = ["launcher", "wallpaper", "accent", "workspaces", "taskbar"]
 center = []
 end    = ["tray", "hotcorners", "notifications", "clipboard", "bluetooth", "volume", "brightness", "battery", "clock", "network", "control-center", "session"]
+
+[widget.accent]
+type = "custom_button"
+glyph = "brightness"
+tooltip = "Accent Tuner"
+
+[widget.accent.actions]
+left = "exec accent-tuner"
+right = "exec accent-tuner"
 
 [widget.hotcorners]
 type = "custom_button"
@@ -76,5 +93,5 @@ enabled = false
 
 [hooks]
 wallpaper_changed = 'mkdir -p "$HOME/.cache/waydog" && printf "%s\n" "$NOCTALIA_WALLPAPER_PATH" > "$HOME/.cache/waydog/wallpaper"'
-colors_changed = 'sleep 0.2; d="$HOME/.config/gtk-3.0"; cat "$d/noctalia.css" "$d/waydog-colors.css" > "$d/colors.css.tmp" && mv -f "$d/colors.css.tmp" "$d/colors.css"'
+colors_changed = 'sleep 0.2; accent-tuner --apply'
 started = "ghostty-noctalia-fix &"

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Accent Tuner
+Exec=accent-tuner
+StartupNotify=false
+Terminal=false
+Icon=preferences-desktop-theme
+Categories=GNOME;GTK;Settings;System;Utility;

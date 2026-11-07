@@ -1,0 +1,7 @@
+/* Waydog accent shade - sets through /usr/local/bin/waydog-accent */
+@define-color accent_bg_color shade({{colors.primary.default.hex}}, 1.00);
+@define-color popover_bg_color @view_bg_color;
+:root {
+    --accent-bg-color: shade({{colors.primary.default.hex}}, 1.00);
+    --popover-bg-color: var(--view-bg-color);
+}

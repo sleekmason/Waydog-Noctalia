@@ -1,0 +1,86 @@
+#!/bin/bash
+# accent tuner - Changes accent brightness to reduce glare and give
+# more control to the user. made by sleekmason 6 Nov. 2026
+
+CFG="${XDG_CONFIG_HOME:-$HOME/.config}"
+TD="$CFG/noctalia/templates"
+T3="$TD/waydog-gtk3.css"
+T4="$TD/waydog-gtk4.css"
+TL="$TD/labwc-themerc"
+D3="$CFG/gtk-3.0"
+N="$D3/noctalia.css"
+
+get_pct() {
+    local f
+    f=$(sed -n 's/.*primary\.default\.hex}}, *\([0-9.]*\)).*/\1/p' "$T3" 2>/dev/null | head -1)
+    awk -v f="${f:-1.00}" 'BEGIN{printf "%d", f*100+0.5}'
+}
+
+filter_for() {
+    local h r g b mx mn sum
+    h=$(sed -n 's/^@define-color accent_bg_color #\([0-9a-fA-F]\{6\}\);.*/\1/p' "$N" 2>/dev/null | head -1)
+    [ -n "$h" ] || { echo "0 0"; return; }
+    r=$((16#${h:0:2})); g=$((16#${h:2:2})); b=$((16#${h:4:2}))
+    mx=$r; (( g > mx )) && mx=$g; (( b > mx )) && mx=$b
+    mn=$r; (( g < mn )) && mn=$g; (( b < mn )) && mn=$b
+    sum=$(( mx + mn ))
+    (( sum > 255 )) && sum=$(( 510 - sum ))
+    (( sum == 0 )) && sum=1
+    echo "$(( ((mx + mn) * (100 - $1) * 2 + 510) / 1020 )) $(( ((mx - mn) * (100 - $1) * 2 + sum) / (sum * 2) ))"
+}
+
+rebuild_colors() {
+    [ -f "$N" ] && [ -f "$D3/waydog-colors.css" ] &&
+        cat "$N" "$D3/waydog-colors.css" > "$D3/colors.css.tmp" && mv -f "$D3/colors.css.tmp" "$D3/colors.css"
+}
+
+apply() {
+    local p="$1" f t d s new changed=0
+    f=$(awk -v p="$p" 'BEGIN{printf "%.2f", p/100}')
+
+    for t in "$T3" "$T4"; do
+        [ -f "$t" ] || continue
+        if ! grep -q "primary\.default\.hex}}, $f)" "$t"; then
+            sed -i "s/\(primary\.default\.hex}}, *\)[0-9.]*/\1$f/g" "$t"
+            changed=1
+        fi
+    done
+
+    if [ -f "$TL" ]; then
+        read -r d s < <(filter_for "$p")
+        new="menu.items.active.bg.color: {{ colors.primary.default.hex"
+        (( d > 0 )) && new+=" | darken $d"
+        (( s > 0 )) && new+=" | desaturate $s"
+        new+=" }}"
+        if ! grep -qxF "$new" "$TL"; then
+            sed -i "s/^menu.items.active.bg.color:.*/$new/" "$TL"
+            changed=1
+        fi
+    fi
+
+    rebuild_colors
+    if [ "$changed" -eq 1 ]; then
+        noctalia msg templates-apply >/dev/null 2>&1
+        ( sleep 1; rebuild_colors
+          pgrep -x labwc >/dev/null && { labwc --reconfigure 2>/dev/null || pkill -HUP -x labwc; } ) &
+    fi
+}
+
+if [ "$1" = "--apply" ]; then
+    apply "$(get_pct)"
+    exit 0
+fi
+
+pct=$(get_pct)
+
+    val=$(yad --scale --title="Accent Tuner" --window-icon=preferences-desktop-theme \
+        --width=340 --height=176 --borders=10 --center \
+        --text="Current accent brightness" \
+        --min-value=50 --max-value=100 --value="$pct" \
+        --button="Apply!gtk-okay:2" --button="Close!gtk-close:1" 2>/dev/null)
+    [ $? -eq 2 ] || exit 0
+
+    apply "$val"
+    pct=$val
+    notify-send "Accent brightness ▸ ${val}%"
+done

@@ -1,3 +1,2 @@
 @import url("noctalia.css");
-@define-color popover_bg_color @view_bg_color;
-:root { --popover-bg-color: var(--view-bg-color); }
+@import url("waydog-colors.css");
