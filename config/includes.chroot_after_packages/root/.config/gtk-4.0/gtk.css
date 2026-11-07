@@ -107,7 +107,7 @@
     
     --shade-color: rgba(0, 0, 0, 0.36);
 }
-/* Waydog accent (GTK4). Strength is set by waydog-accent. */
+/* Accent shade tuner - Strength set through accent-tuner. */
 @define-color accent_bg_color shade(#234f78, 1.00);
 @define-color popover_bg_color @view_bg_color;
 :root {
