@@ -134,6 +134,11 @@
     <!--<separator/> -->
     <!-- <menu id="/Debian"/> -->
     <menu icon="preferences-desktop" id="toggles-314" label="Toggles">
+      <item label="Accent Tuner" icon="preferences-desktop-theme">
+        <action name="Execute">
+          <execute>accent-tuner</execute>
+        </action>
+      </item>		
       <item label="Gamma Control" icon="preferences-desktop-display">
         <action name="Execute">
           <execute>wlr-gamma-gui</execute>
