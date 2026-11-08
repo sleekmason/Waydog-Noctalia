@@ -95,3 +95,4 @@ enabled = false
 wallpaper_changed = 'mkdir -p "$HOME/.cache/waydog" && printf "%s\n" "$NOCTALIA_WALLPAPER_PATH" > "$HOME/.cache/waydog/wallpaper"'
 colors_changed = 'sleep 0.2; accent-tuner --apply'
 started = "ghostty-noctalia-fix &"
+theme_mode_changed = 'sleep 0.2; accent-tuner --apply'

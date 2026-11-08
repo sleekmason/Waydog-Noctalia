@@ -17,16 +17,25 @@ get_pct() {
 }
 
 filter_for() {
-    local h r g b mx mn sum
-    h=$(sed -n 's/^@define-color accent_bg_color #\([0-9a-fA-F]\{6\}\);.*/\1/p' "$N" 2>/dev/null | head -1)
-    [ -n "$h" ] || { echo "0 0"; return; }
-    r=$((16#${h:0:2})); g=$((16#${h:2:2})); b=$((16#${h:4:2}))
-    mx=$r; (( g > mx )) && mx=$g; (( b > mx )) && mx=$b
-    mn=$r; (( g < mn )) && mn=$g; (( b < mn )) && mn=$b
-    sum=$(( mx + mn ))
-    (( sum > 255 )) && sum=$(( 510 - sum ))
-    (( sum == 0 )) && sum=1
-    echo "$(( ((mx + mn) * (100 - $1) * 2 + 510) / 1020 )) $(( ((mx - mn) * (100 - $1) * 2 + sum) / (sum * 2) ))"
+    local a b
+    a=$(sed -n 's/^@define-color accent_bg_color #\([0-9a-fA-F]\{6\}\);.*/\1/p' "$N" 2>/dev/null | head -1)
+    b=$(sed -n 's/^@define-color window_bg_color #\([0-9a-fA-F]\{6\}\);.*/\1/p' "$N" 2>/dev/null | head -1)
+    [ -n "$a" ] && [ -n "$b" ] || { echo "0 0"; return; }
+    awk -v a="$a" -v b="$b" -v p="$1" '
+        function hx(s) { return index("0123456789abcdef", tolower(s)) - 1 }
+        function ch(h, i) { return (hx(substr(h, i, 1)) * 16 + hx(substr(h, i + 1, 1))) / 255 }
+        function hsl(h,   r, g, bl, mx, mn, d) {
+            r = ch(h, 1); g = ch(h, 3); bl = ch(h, 5)
+            mx = r; if (g > mx) mx = g; if (bl > mx) mx = bl
+            mn = r; if (g < mn) mn = g; if (bl < mn) mn = bl
+            L = (mx + mn) / 2; d = mx - mn
+            S = (d == 0) ? 0 : (L <= 0.5 ? d / (mx + mn) : d / (2 - mx - mn))
+        }
+        BEGIN {
+            hsl(a); la = L; sa = S; hsl(b); lb = L; sb = S; k = (100 - p) / 100
+            dl = (la - lb) * k * 100; ds = (sa - sb) * k * 100
+            printf "%d %d\n", (dl >= 0 ? dl + 0.5 : dl - 0.5), (ds >= 0 ? ds + 0.5 : ds - 0.5)
+        }'
 }
 
 rebuild_colors() {
@@ -50,6 +59,7 @@ apply() {
         read -r d s < <(filter_for "$p")
         new="menu.items.active.bg.color: {{ colors.primary.default.hex"
         (( d > 0 )) && new+=" | darken $d"
+        (( d < 0 )) && new+=" | lighten $(( -d ))"
         (( s > 0 )) && new+=" | desaturate $s"
         new+=" }}"
         if ! grep -qxF "$new" "$TL"; then
@@ -59,6 +69,12 @@ apply() {
     fi
 
     rebuild_colors
+        rebuild_colors
+    ( for i in $(seq 20); do
+          [ "$N" -nt "$D3/waydog-colors.css" ] || break
+          sleep 0.1
+      done
+      rebuild_colors ) &
     if [ "$changed" -eq 1 ]; then
         noctalia msg templates-apply >/dev/null 2>&1
         ( sleep 1; rebuild_colors
@@ -76,11 +92,10 @@ pct=$(get_pct)
     val=$(yad --scale --title="Accent Tuner" --window-icon=preferences-desktop-theme \
         --width=340 --height=176 --borders=10 --center \
         --text="Current accent brightness" \
-        --min-value=50 --max-value=100 --value="$pct" \
+        --min-value=40 --max-value=100 --value="$pct" \
         --button="Apply!gtk-okay:2" --button="Close!gtk-close:1" 2>/dev/null)
     [ $? -eq 2 ] || exit 0
 
     apply "$val"
     pct=$val
     notify-send "Accent brightness ▸ ${val}%"
-done

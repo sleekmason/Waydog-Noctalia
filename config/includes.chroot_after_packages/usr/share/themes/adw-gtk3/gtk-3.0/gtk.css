@@ -191,7 +191,8 @@ textview text selection, .view:selected, iconview:selected,
 .view text:selected,
 iconview text:selected,
 textview text:selected {
-  background-color: alpha(@accent_bg_color,0.25);
+  background-color: @accent_bg_color;
+  color: @accent_fg_color;
 }
 .selection-mode button.titlebutton, treeview.view:selected:focus, treeview.view:selected, headerbar entry selection, .titlebar entry selection,
 entry selection, spinbutton:not(.vertical) selection, flowbox flowboxchild:selected, .view text selection:focus, iconview text selection:focus, .view text selection, iconview text selection,
@@ -200,7 +201,7 @@ textview text selection, .view:selected, iconview:selected,
 .view text:selected,
 iconview text:selected,
 textview text:selected {
-  color: @window_fg_color;
+  color: @accent_fg_color;
 }
 .view, iconview,
 .view text,
@@ -2988,6 +2989,8 @@ treeview.view {
 }
 treeview.view:selected:focus, treeview.view:selected {
   border-radius: 0;
+  background-color: shade(@accent_bg_color, 1.0);
+  color: @accent_fg_color;
 }
 treeview.view:selected:backdrop, treeview.view:selected {
   border-left-color: mix(@accent_fg_color,@accent_bg_color,0.5);
