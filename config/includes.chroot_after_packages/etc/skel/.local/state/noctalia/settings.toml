@@ -16,6 +16,9 @@ directory = "/usr/share/backgrounds/wallpapers"
 scale = 0.9
 show_app_name = false
 
+[audio]
+enable_notification_sounds = false
+
 [shell.launcher]
 default_view = "all"
 width = 560
