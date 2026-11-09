@@ -9,6 +9,7 @@ T4="$TD/waydog-gtk4.css"
 TL="$TD/labwc-themerc"
 D3="$CFG/gtk-3.0"
 N="$D3/noctalia.css"
+REV="$CFG/noctalia/accent-tuner-reverse"
 
 get_pct() {
     local f
@@ -41,6 +42,22 @@ filter_for() {
         }'
 }
 
+fg_filter() {
+    local h r g b mx mn dark want
+    h=$(sed -n 's/^@define-color accent_fg_color #\([0-9a-fA-F]\{6\}\);.*/\1/p' "$N" 2>/dev/null | head -1)
+    [ -n "$h" ] || return
+    r=$((16#${h:0:2})); g=$((16#${h:2:2})); b=$((16#${h:4:2}))
+    mx=$r; (( g > mx )) && mx=$g; (( b > mx )) && mx=$b
+    mn=$r; (( g < mn )) && mn=$g; (( b < mn )) && mn=$b
+    (( mx + mn < 255 )) && dark=1 || dark=0
+    want=$dark; [ -f "$REV" ] && want=$(( 1 - dark ))
+    if (( want )); then
+        (( dark )) && echo " | desaturate 100 | darken 9" || echo " | desaturate 100 | set_lightness 4"
+    else
+        (( dark )) && echo " | desaturate 100 | set_lightness 97"
+    fi
+}
+
 rebuild_colors() {
     [ -f "$N" ] && [ -f "$D3/waydog-colors.css" ] &&
         cat "$N" "$D3/waydog-colors.css" > "$D3/colors.css.tmp" && mv -f "$D3/colors.css.tmp" "$D3/colors.css"
@@ -57,6 +74,19 @@ apply() {
             changed=1
         fi
     done
+    
+    fg=$(fg_filter)
+    want="{{colors.on_primary.default.hex$fg}}"
+    for t in "$T3" "$T4"; do
+        [ -f "$t" ] || continue
+        grep -qF "$want" "$t" && continue
+        sed -i "s/{{colors\.on_primary\.default\.hex[^}]*}}/$want/g" "$t"
+        changed=1
+    done
+    if [ -f "$TL" ]; then
+        newt="menu.items.active.text.color: {{ colors.on_primary.default.hex$fg }}"
+        grep -qxF "$newt" "$TL" || { sed -i "s/^menu.items.active.text.color:.*/$newt/" "$TL"; changed=1; }
+    fi
 
     if [ -f "$TL" ]; then
         read -r h s l < <(filter_for "$p")
@@ -89,14 +119,17 @@ if [ "$1" = "--apply" ]; then
 fi
 
 pct=$(get_pct)
-
-    val=$(yad --scale --title="Accent Tuner" --window-icon=preferences-desktop-theme \
-        --width=340 --height=176 --borders=10 --center \
+    rev=FALSE; [ -f "$REV" ] && rev=TRUE
+    out=$(yad --form --title="Accent Tuner" --window-icon=preferences-desktop-theme \
+        --width=340 --height=165 --borders=10 --center \
         --text="Current accent brightness" \
-        --min-value=40 --max-value=100 --value="$pct" \
+        --field="Current brightness (%)     :NUM" "$pct!40..100!1" \
+        --field=" Reverse text color:CHK" "$rev" \
         --button="Apply!gtk-okay:2" --button="Close!gtk-close:1" 2>/dev/null)
     [ $? -eq 2 ] || exit 0
+    IFS='|' read -r val r _ <<< "$out"
+    val=${val%%.*}
+    (( val < 40 )) && val=40
+    [ "$r" = TRUE ] && touch "$REV" || rm -f "$REV"
 
     apply "$val"
-    pct=$val
-    notify-send "Accent brightness ▸ ${val}%"
