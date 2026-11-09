@@ -414,7 +414,7 @@ button {
 }
 notebook > header > tabs > arrow:focus,
 button:focus {
-  outline-color: alpha(@accent_color,0.5);
+  outline-color: alpha(@accent_color,0.4);
   outline-width: 2px;
   outline-offset: -2px;
 }

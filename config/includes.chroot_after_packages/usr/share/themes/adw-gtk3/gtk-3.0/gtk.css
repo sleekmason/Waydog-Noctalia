@@ -439,8 +439,8 @@ button.flat:hover:active {
 
 notebook > header > tabs > arrow:hover,
 button:hover {
-  color: @window_fg_color;
-  background-color: mix(@window_fg_color,@window_bg_color,0.85);
+  color: @accent_fg_color;
+  background-color: @accent_bg_color;
   box-shadow: none;
   -gtk-icon-effect: highlight;
 }
