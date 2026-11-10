@@ -1,9 +1,14 @@
 
-    Thank you for installing Waydog. For any bugs
-    or other issues, please post in the forum:
+    Thank you for installing Waydog Noctalia. See
+    the settings dialog for an array of options.
     
+    Most theme changes are controlled through the
+    Noctalia wallpaper dialog. Switch from Custom
+    to Wallpaper for auto mode.
+    
+    To report any issues:
     https://sourceforge.net/p/lilidog/discussion/
-    
+  
     Use 'Ctrl+Alt+k' to see the current keybinds.
     
     Look in the Utilities menu and the installers
