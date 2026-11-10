@@ -46,7 +46,7 @@ if command -v yad >/dev/null; then
   else
     yad --title "Welcome to Waydog Noctalia!" \
       --window-icon=/usr/share/icons/ld-icons/paw-color.png \
-      --width=428 --height=420 --center \
+      --width=428 --height=428 --center \
       --escape-ok --undecorated --skip-taskbar \
       --button="gtk-ok:0" \
       --text-info --justify=left --wrap \
