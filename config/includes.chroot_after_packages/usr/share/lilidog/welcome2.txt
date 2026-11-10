@@ -1,8 +1,8 @@
               
     Welcome to Waydog Trixie Noctalia. This build
-    uses Noctalia for many of the accessories.
+    uses Noctalia for most of the accessories.
     
-    Most theme changes are controlled through the
+    Main theme changes are controlled through the
     Noctalia wallpaper dialog. Switch from Custom
     to Wallpaper for auto mode.
     

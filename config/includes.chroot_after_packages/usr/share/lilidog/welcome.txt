@@ -2,7 +2,7 @@
     Thank you for installing Waydog Noctalia. See
     the settings dialog for an array of options.
     
-    Most theme changes are controlled through the
+    Main theme changes are controlled through the
     Noctalia wallpaper dialog. Switch from Custom
     to Wallpaper for auto mode.
     
