@@ -2,7 +2,6 @@
 # Made by sleekmason 30 nov 2025
 
 SDDM_BG="/usr/share/sddm/themes/fane/background.jpg"
-CURRENT_FILE="$HOME/.cache/waydog/wallpaper"
 WALL_DIR="/usr/share/backgrounds"
 
 if ! command -v sddm >/dev/null 2>&1; then
@@ -10,8 +9,7 @@ if ! command -v sddm >/dev/null 2>&1; then
     exit 0
 fi
 
-current=""
-[[ -f "$CURRENT_FILE" ]] && current="$(head -n1 "$CURRENT_FILE")"
+current="$(noctalia msg wallpaper-get 2>/dev/null)"
 if [[ -f "$current" ]]; then
     start="$current"
 elif [[ -d "$WALL_DIR" ]]; then

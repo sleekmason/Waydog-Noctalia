@@ -32,12 +32,10 @@ if ! command -v gm >/dev/null 2>&1 && ! command -v convert >/dev/null 2>&1; then
     exit 0
 fi
 
-CURRENT_FILE="$HOME/.cache/waydog/wallpaper"
 WALL_DIR="/usr/share/backgrounds"
 SCRIPT_PATH="$(readlink -f "$0")"
 
-current=""
-[[ -f "$CURRENT_FILE" ]] && current="$(head -n1 "$CURRENT_FILE")"
+current="$(noctalia msg wallpaper-get 2>/dev/null)"
 if [[ -f "$current" ]]; then
     start="$current"
 elif [[ -d "$WALL_DIR" ]]; then
