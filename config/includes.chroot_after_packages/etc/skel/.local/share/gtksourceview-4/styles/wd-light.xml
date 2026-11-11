@@ -5,7 +5,7 @@
 -->
 <style-scheme id="wd-light" _name="wd-light" version="1.0">
   <author>GtkSourceView team</author>
-  <_description>Lilidog color scheme based off of classic</_description>
+  <_description>Waydog color scheme based off of classic</_description>
 
   <!-- Palette -->
   <color name="white"      value="#FFFFFF"/>
@@ -22,7 +22,9 @@
 
   <!-- Global Settings -->
   <style name="text"                        foreground="#171512" background="#EEF0F0"/>
+  <!--
   <style name="selection"                   foreground="#FFFFFF" background="#C45154"/>
+  -->
   <style name="current-line"                background="#92C0EB"/>
   <style name="current-line-number"         background="#92C0EB"/>
   <style name="draw-spaces"                 foreground="#babdb6"/>

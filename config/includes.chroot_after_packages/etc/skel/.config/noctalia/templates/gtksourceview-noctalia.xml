@@ -23,7 +23,7 @@
   <!-- Global Settings -->
   <style name="text"                        foreground="{{colors.on_surface.default.hex}}" background="{{colors.surface.default.hex}}"/>
   <!--
-  <style name="selection"                   foreground="#FAFAFA" background="434A4D"/>
+  <style name="selection"                   foreground="#FAFAFA" background="#434A4D"/>
   -->
   <style name="current-line"                background="{{colors.surface_container.default.hex}}"/>
   <style name="current-line-number"         background="{{colors.surface_container.default.hex}}"/>
