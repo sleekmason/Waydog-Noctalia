@@ -226,7 +226,7 @@ if grep -q "#GRUB_DISABLE_OS_PROBER=false" "/etc/default/grub"; then
     _update
     _apt_location
     _remove_packages
-    _add_noctalia
+#    _add_noctalia
     _add_backports
 #    _upgrade_kernel   
     _add_conky
@@ -238,7 +238,7 @@ else
     _update
     _apt_location
     _remove_packages
-    _add_noctalia
+#    _add_noctalia
     _add_backports
 #    _upgrade_kernel    
     _add_conky

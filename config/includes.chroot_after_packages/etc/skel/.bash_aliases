@@ -9,5 +9,7 @@ alias prefer-light="gsettings set org.gnome.desktop.interface color-scheme prefe
 alias terminal-choice="sudo update-alternatives --config x-terminal-emulator"
 alias timezone="sudo dpkg-reconfigure tzdata"
 alias welcome="sudo /usr/local/bin/xentry -i"
+# These enable or disable the Noctalia repository for updates if desired. 
+# Extreme caution is advised, or just don't do it unless recommended. The installled version is stable.
 alias noctalia-repo-on="sudo sed -i 's/^Enabled:.*/Enabled: True/' /etc/apt/sources.list.d/noctalia-trixie.sources && sudo apt update"
 alias noctalia-repo-off="sudo sed -i 's/^Enabled:.*/Enabled: False/' /etc/apt/sources.list.d/noctalia-trixie.sources && sudo apt update"

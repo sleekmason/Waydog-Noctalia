@@ -130,6 +130,11 @@
           <execute>geany</execute>
         </action>
       </item>
+      <item label="Mousepad" icon="mousepad">
+        <action name="Execute">
+          <execute>mousepad</execute>
+        </action>
+      </item>
     </menu>
     <!--<separator/> -->
     <!-- <menu id="/Debian"/> -->

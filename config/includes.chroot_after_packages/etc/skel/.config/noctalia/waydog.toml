@@ -43,6 +43,10 @@ custom_palette = "Dragon"
     input_path  = "$XDG_CONFIG_HOME/noctalia/templates/waydog-gtk4.css"
     output_path = "$XDG_CONFIG_HOME/gtk-4.0/waydog-colors.css"
 
+    [theme.templates.user.gtksourceview]
+    input_path  = "$XDG_CONFIG_HOME/noctalia/templates/gtksourceview-noctalia.xml"
+    output_path = "~/.local/share/gtksourceview-4/styles/noctalia.xml"
+
 [wallpaper]
 directory = "/usr/share/backgrounds/wallpapers"
 
