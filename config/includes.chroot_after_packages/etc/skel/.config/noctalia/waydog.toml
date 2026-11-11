@@ -47,6 +47,10 @@ custom_palette = "Dragon"
     input_path  = "$XDG_CONFIG_HOME/noctalia/templates/gtksourceview-noctalia.xml"
     output_path = "~/.local/share/gtksourceview-4/styles/noctalia.xml"
 
+    [theme.templates.user.geany]
+    input_path  = "$XDG_CONFIG_HOME/noctalia/templates/geany-noctalia.conf"
+    output_path = "$XDG_CONFIG_HOME/geany/colorschemes/Noctalia.conf"
+
 [wallpaper]
 directory = "/usr/share/backgrounds/wallpapers"
 
