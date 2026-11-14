@@ -23,7 +23,6 @@ action = "reboot"
 action = "shutdown"
 
 [theme]
-wallpaper_scheme = "vibrant"
 source = "custom"
 custom_palette = "Dragon"
 
