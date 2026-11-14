@@ -1,6 +1,6 @@
 
     Thank you for installing Waydog Noctalia. See
-    the settings dialog for an array of options.
+    the settings panel for all of the options.
     
     Main theme changes are controlled through the
     Noctalia wallpaper dialog. Switch from Custom
