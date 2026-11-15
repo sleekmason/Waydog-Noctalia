@@ -41,7 +41,8 @@ QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 XCURSOR_THEME=Adwaita
 XCURSOR_SIZE=24
 
-GTK_MODULES=colorreload-gtk-module
+##
+# GTK_MODULES=colorreload-gtk-module
 ##
 ## Disable hardware cursors. Most users would not want to do this, but if you
 ## are experiencing issues with disappearing cursors, this might fix it.
