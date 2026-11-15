@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Noctalia Settings
+Exec=noctalia msg settings-toggle
+StartupNotify=false
+Terminal=false
+Icon=noctalia
+Categories=GNOME;GTK;Settings;System;Utility;

@@ -290,7 +290,7 @@
           <execute>logout-theme-chooser</execute>
         </action>
       </item>
-      <item label="Settings" icon="noctalia">
+      <item label="Noctalia Settings" icon="noctalia">
         <action name="Execute">
           <execute>noctalia msg settings-toggle</execute>
         </action>
