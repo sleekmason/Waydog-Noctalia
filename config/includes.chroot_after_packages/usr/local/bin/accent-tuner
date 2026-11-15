@@ -122,13 +122,13 @@ pct=$(get_pct)
     rev=FALSE; [ -f "$REV" ] && rev=TRUE
     out=$(yad --form --title="Accent Tuner" --window-icon=preferences-desktop-theme \
         --width=340 --height=138 --borders=10 --center \
-        --field="Current brightness (%)     :NUM" "$pct!40..100!1" \
+        --field="Current brightness (%)     :NUM" "$pct!10..100!1" \
         --field=" Reverse text color:CHK" "$rev" \
         --button="Apply!gtk-okay:2" --button="Close!gtk-close:1" 2>/dev/null)
     [ $? -eq 2 ] || exit 0
     IFS='|' read -r val r _ <<< "$out"
     val=${val%%.*}
-    (( val < 40 )) && val=40
+    (( val < 10 )) && val=10
     [ "$r" = TRUE ] && touch "$REV" || rm -f "$REV"
 
     apply "$val"
