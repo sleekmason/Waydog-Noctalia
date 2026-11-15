@@ -5789,9 +5789,9 @@ tooltip {
   text-shadow: 0 1px black;
 }
 tooltip.background {
-  background-color: shade(@window_bg_color,0.80);
+  background-color: shade(@window_bg_color,0.92);
   background-clip: padding-box;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 tooltip decoration {
   background-color: transparent;
