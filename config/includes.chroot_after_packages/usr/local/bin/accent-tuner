@@ -118,14 +118,21 @@ if [ "$1" = "--apply" ]; then
     exit 0
 fi
 
+reset_defaults() {
+    rm -f "$REV"
+    apply 100
+}
+
 pct=$(get_pct)
     rev=FALSE; [ -f "$REV" ] && rev=TRUE
     out=$(yad --form --title="Accent Tuner" --window-icon=preferences-desktop-theme \
-        --width=340 --height=138 --borders=10 --center \
+        --width=340 --height=138 --borders=10 --center --buttons-layout=spread \
         --field="Current brightness (%)     :NUM" "$pct!10..100!1" \
         --field=" Reverse text color:CHK" "$rev" \
-        --button="Apply!gtk-okay:2" --button="Close!gtk-close:1" 2>/dev/null)
-    [ $? -eq 2 ] || exit 0
+        --button="Reset!edit-undo:3" --button="Apply!gtk-ok:2" --button="Close!gtk-close:1" 2>/dev/null)
+    rc=$?
+    [ "$rc" -eq 3 ] && { reset_defaults; exit 0; }
+    [ "$rc" -eq 2 ] || exit 0
     IFS='|' read -r val r _ <<< "$out"
     val=${val%%.*}
     (( val < 10 )) && val=10
