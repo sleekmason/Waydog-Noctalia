@@ -3628,8 +3628,8 @@ scrollbar {
 }
 scrollbar slider {
   color: @window_fg_color;
-  min-width: 8px;
-  min-height: 8px;
+  min-width: 10px;
+  min-height: 10px;
   margin: -1px;
   border: 4px solid transparent;
   border-radius: 10px;
@@ -3638,10 +3638,10 @@ scrollbar slider {
   transition: all 200ms linear;
 }
 scrollbar slider:hover {
-  background-color: alpha(currentColor,0.4);
+  background-color: alpha(@accent_bg_color,0.6);
 }
 scrollbar slider:hover:active {
-  background-color: alpha(currentColor,0.6);
+  background-color: alpha(@accent_bg_color,1.0);
 }
 scrollbar slider:disabled {
   background-color: transparent;
@@ -3657,7 +3657,7 @@ scrollbar.overlay-indicator:not(.dragging):not(.hovering) {
 }
 scrollbar.overlay-indicator:not(.dragging):not(.hovering) slider {
   margin: 0;
-  min-width: 3px;
+  min-width: 6px;
   min-height: 3px;
   background-color: @window_fg_color;
   border: 1px solid white;
