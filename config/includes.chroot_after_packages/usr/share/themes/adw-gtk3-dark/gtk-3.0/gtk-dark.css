@@ -3626,10 +3626,10 @@ scrollbar slider {
   transition: all 200ms linear;
 }
 scrollbar slider:hover {
-  background-color: alpha(@accent_bg_color,0.75);
+  background-color: alpha(@accent_bg_color,0.8);
 }
 scrollbar slider:hover:active {
-  background-color: alpha(@accent_bg_color,1.0);
+  background-color: shade(@accent_bg_color,1.05);
 }
 scrollbar slider:disabled {
   background-color: transparent;
