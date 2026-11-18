@@ -448,7 +448,7 @@ notebook > header > tabs > arrow:active, notebook > header > tabs > arrow:checke
 button:active,
 button:checked {
   color: @window_fg_color;
-  background-color: mix(@window_fg_color,@window_bg_color,0.7);
+  background-color: mix(@window_fg_color,@card_bg_color,0.98);
   box-shadow: none;
   text-shadow: none;
   -gtk-icon-shadow: none;
@@ -456,7 +456,7 @@ button:checked {
 notebook > header > tabs > arrow:active:hover, notebook > header > tabs > arrow:checked:hover,
 button:active:hover,
 button:checked:hover {
-  background-color: mix(@window_fg_color,@window_bg_color,0.65);
+  background-color: alpha(@accent_bg_color,0.36);
 }
 notebook > header > tabs > arrow:active, notebook > header > tabs > arrow:checked,
 button:active,
