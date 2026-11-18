@@ -3638,7 +3638,7 @@ scrollbar slider {
   transition: all 200ms linear;
 }
 scrollbar slider:hover {
-  background-color: shade(@accent_bg_color,0.7);
+  background-color: shade(@accent_bg_color,0.88);
 }
 scrollbar slider:hover:active {
   background-color: shade(@accent_bg_color,1.05);
