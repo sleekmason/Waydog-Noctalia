@@ -63,6 +63,11 @@ rebuild_colors() {
         cat "$N" "$D3/waydog-colors.css" > "$D3/colors.css.tmp" && mv -f "$D3/colors.css.tmp" "$D3/colors.css"
 }
 
+reset_defaults() {
+    rm -f "$REV"
+    apply 100
+}
+
 apply() {
     local p="$1" f t h s l new changed=0
     f=$(awk -v p="$p" 'BEGIN{printf "%.2f", p/100}')
@@ -114,14 +119,20 @@ apply() {
 }
 
 if [ "$1" = "--apply" ]; then
+    SF="$CFG/noctalia/accent-tuner-source"
+    src=$(noctalia msg config-get theme.source 2>/dev/null | tr -d "'\" ")
+    last=$(cat "$SF" 2>/dev/null)
+    if [ -n "$src" ] && [ "$src" != "$last" ]; then
+        echo "$src" > "$SF"
+        if [ "$src" = custom ] && [ -n "$last" ] && [ "$(get_pct)" -lt 50 ] && [ -f "$REV" ]; then
+            reset_defaults
+            notify-send "Accent Tuner Reset" "Resets on switch to Custom if under 50% with reversed text."
+            exit 0
+        fi
+    fi
     apply "$(get_pct)"
     exit 0
 fi
-
-reset_defaults() {
-    rm -f "$REV"
-    apply 100
-}
 
 pct=$(get_pct)
     rev=FALSE; [ -f "$REV" ] && rev=TRUE
