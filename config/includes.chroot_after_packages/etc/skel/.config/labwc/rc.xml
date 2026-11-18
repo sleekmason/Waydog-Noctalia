@@ -89,6 +89,7 @@
   <windowRules>
     <windowRule identifier="com.mitchellh.ghostty" serverDecoration="no"/>
     <windowRule identifier="com.gabm.satty" serverDecoration="yes"/>
+    <windowRule identifier="yad" title="Accent Tuner"><action name="MoveTo" x="60" y="120"/></windowRule>
   </windowRules>
   <windowSwitcher preview="yes" outlines="yes" unshade="yes">
     <osd show="yes" style="classic" output="all" thumbnailLabelFormat="%T"/>
