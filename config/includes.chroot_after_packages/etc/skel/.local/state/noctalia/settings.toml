@@ -26,6 +26,7 @@ width = 560
 [shell.panel]
 launcher_position = "top_left"
 transparency_mode = "soft"
+wallpaper_show_names = false
 
 [bar.default]
 start  = ["launcher", "wallpaper", "accent", "workspaces", "taskbar"]
